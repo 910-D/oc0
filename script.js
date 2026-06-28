@@ -181,9 +181,9 @@ const characters = [
     age:"27",
     gender:"남성",
     height:"178cm",
-    nationality:"",
+    nationality:"IT, Rome",
     job:"마피아 조직원",
-    region:"",
+    region:"Lazio",
     commissioner:"",
     image:""
   },
@@ -856,6 +856,9 @@ function renderCharacters(data, page = 1){
       }else if(char.region === "Campania"){
         overlay.src = "https://i.imgur.com/a0F630G.png";
         overlay.style.display = "block";
+      }else if(char.region === "Lazio"){
+        overlay.src = "https://imgur.com/lKoIlFo.png";
+        overlay.style.display = "block";
       }else if(char.region === "Busan"){
         overlay.src = "https://i.imgur.com/NlL45hs.png";
         overlay.style.display = "block";
@@ -1187,7 +1190,7 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
       /* 카드 가장자리 보정 (CARD/2) */
       const dx = pos.x - CX, dy = pos.y - CY;
       const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-      const r2 = CARD/2 + 10;
+      const r2 = CARD/2 + 3;
       const sx = CX + (dx/dist)*r2, sy = CY + (dy/dist)*r2;
       const ex = pos.x - (dx/dist)*r2, ey = pos.y - (dy/dist)*r2;
 
