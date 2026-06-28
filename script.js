@@ -278,6 +278,20 @@ const characters = [
   },
 
   {
+    name:"Tonante Zeno",
+    koreanName:"토난테 제노",
+    country:"이탈리아",
+    age:"22",
+    gender:"남성",
+    height:"170cm",
+    nationality:"IT, pescara",
+    job:"마피아 조직원",
+    region:"Abruzzo",
+    commissioner:"",
+    image:""
+  },
+  
+  {
     name:"Fixer",
     koreanName:"정보상",
     country:"이탈리아",
@@ -289,8 +303,90 @@ const characters = [
     nationality:"&US, St. Louis&",
     job:"마피아 정보상",
     commissioner:"",
-    image:""
+    image:"",
+    tags:[
+      "#능글맞은",
+      "#예측불가한",
+      "#광기 어린",
+      "#유능한",
+      "#변덕스러운"
+    ],
+
+    personality:`그녀의 내면은 종잡을 수 없는 능글맞음과 삐뚤어진 장난기로 가득하다. 상대방이 곤란해하거나 당황하는 모습을 구경하는 것에서 재미를 찾으며, 언제나 나른하고 여유로운 태도로 사람들을 놀리곤 한다. &마피아 세계&에서 정보를 팔며 사는 사람답게, 일반적인 도덕이나 규칙 같은 건 전혀 신경 쓰지 않는다. 오히려 남들에게는 비극적인 사건조차 그녀에게는 그저 재미있는 이야깃거리일 뿐이다. 이런 기괴할 정도로 밝은 성격과 광기는 그녀가 위험한 상황에서도 전혀 두려워하지 않고 오히려 웃게 만드는 원인이 되며, 누구도 그녀의 속마음을 알 수 없게 만든다.
+
+그녀의 머리는 남들보다 훨씬 빠르게 돌아가며, 한 가지에 미친 듯이 집중하는 능력이 있다. &마피아들의 뒷세계를 다니며& 정보를 모을 때, 그녀는 정보를 그저 사실대로 전달하는 것에 그치지 않고, 그 정보를 이용해서 상황을 어떻게 재미있게 뒤흔들지 고민한다. 그녀에게 정보는 곧 힘이자 가지고 노는 장난감이며, 자신이 모은 비밀들로 다른 사람들의 인생을 마음대로 주무르고 그 결과를 지켜보는 것에서 엄청난 기쁨을 느낀다.
+
+그녀는 참을성이 부족하고 마음이 수시로 바뀌어서, 늘 주변에 크고 작은 문제를 일으킨다. 즉흥적으로 행동하다 보니, 그녀 주변은 항상 시끄럽고 사건이 끊이지 않는다. 그녀에게 계획을 짜거나 규칙을 지키는 일은 그저 답답한 방해물일 뿐. 기분에 따라 행동을 완전히 바꾸는 변덕 때문에 주변 사람들은 그녀를 전혀 믿지 못하지만, 그녀만이 가진 엄청난 정보력 때문에 아무도 그녀를 함부로 대하지 못한다.
+`,
+
+stories:{
+      1:`&2003년 8월 1일 미국 세인트루이스의 빈민가에서& 그녀가 태어났다. 
+      
+      부모의 얼굴을 알지 못한 채 &보호소와 거리를 전전하며 자란& 그녀에게 세상은 그저 관찰하기 좋은 거대한 놀이터였다. 
+      
+      어린 시절부터 그녀는 사람들의 시선을 피하거나 타인의 비밀을 엿듣는 데 천부적인 재능을 보였다. 
+      
+      굶주림과 외로움 속에서도 기죽지 않고, 오히려 주변의 어른들이 숨기고 싶어 하는 치부를 찾아내어 자신만의 이득을 챙기기 시작했다. 
+      
+      이때부터 그녀는 타인의 약점이 곧 자신의 생존 수단이 된다는 것을 깨달았다.`,
+
+      2:`그녀는 본격적으로 뒷골목의 소문과 비밀을 수집하는 일을 시작했다. 
+      
+      처음에는 단순히 빵 한 조각을 얻기 위해 시작했던 일이었지만, 누군가의 비밀을 알고 그것을 무기 삼아 상황을 뒤흔드는 짜릿함은 그녀를 중독시키기에 충분했다. 
+      
+      그녀는 사람들의 대화를 도청하고, 흩어진 정보들을 조각보처럼 이어 붙여 진실을 찾아내는 것에 미친 듯이 몰입했다. 
+      
+      위험한 일을 벌이고 사람들이 당황하는 모습을 지켜보는 것에서 그녀는 즐거움을 느꼈고, 점차 세인트루이스 뒷골목에서 '모르는 것이 없는 골칫덩이'로 그 이름을 알리기 시작했다.`,
+
+      3:`그녀의 정보력은 점점 커져 마피아들의 귀에까지 들어갔다. 
+      
+      그들은 그녀의 재능을 이용하려 들었고, 그녀 역시 마피아들의 뒤를 밟으며 위험한 줄타기를 즐겼다. 
+      
+      한 번은 마피아의 핵심 비밀을 훔쳐내어 조직을 곤경에 빠뜨리는 대형 사고를 치는데, 그 과정에서 그녀는 죽음의 문턱까지 가는 위험을 겪었다. 
+      
+      하지만 공포를 느끼기보다는 오히려 삶과 죽음의 경계에서 느끼는 아드레날린에 취해버렸다. 
+      
+      이때부터 그녀의 행동은 예측 범위를 벗어나기 시작했고, 웃으면서 방아쇠를 당기거나 불길 속에서도 농담을 던지는 등 주변 사람들이 보기에 명백히 미친 사람 같은 행동을 반복했다.`,
+
+      4:`미국 내에서 감당하기 힘든 사고를 연달아 치며 더 이상 머물 곳이 없게 되자 그녀는 미련 없이 이탈리아의 시칠리아로 떠났다. 
+      
+      모든 것이 낯선 땅이었지만, 그녀는 오히려 그 상황을 완벽한 도피이자 새로운 게임의 시작이라 여기며 들떠 있었다. 
+      
+      시칠리아에 발을 들이자마자 그녀는 특유의 대담함으로 현지 마피아 조직의 핵심부까지 거침없이 파고들었다. 
+      
+      그녀가 가진 정보력과 위험한 기질을 눈여겨본 시칠리아의 한 마피아 보스는 그녀의 비범함을 한눈에 알아보고, 그녀를 조직의 정보원이 되라는 파격적인 제안을 건넸다.`,
+
+      5:`보스의 제안을 받아들인 그녀는 &17살의 나이에& 정식으로 마피아 조직의 일원이 되었다. 
+      
+      그녀는 단순한 범죄자가 아니라 마피아의 뒤를 책임지는 핵심 정보상으로 성장했다. 
+      
+      이탈리아의 고풍스러운 거리에서도 그녀의 광기는 여전해서, 조직 간의 전쟁을 부추기거나 판을 뒤흔드는 일에 늘 앞장선다. 
+
+<br><br>
+
+<span class="story-quote">
+「 아하하, 벌써 끝이야? 질문이 너무 지루해서 하품이 다 나오네. 수고가 참 많아~! 」
+</span>`
+    },
+
+    timeline:[
+      { date:"&2003.08.01&", content:"&미국 세인트루이스 빈민가에서 출생.&" },
+      { date:"&2013.05.20&", content:"사람들의 비밀을 엿듣고 이용하며 정보 수집." },
+      { date:"&2018.06.15&", content:"위험한 마피아 정보 유출 사건을 일으키며 광기 어린 줄타기를 시작함." },
+      { date:"&2020.08.01&", content:"추격을 피해 이탈리아 시칠리아로 도망침." },
+      { date:"&2020.10.10&", content:"현지 마피아 보스에게 능력을 인정받아 조직 정보원이 됨." },
+      { date:"&2022.04.15&", content:"마피아의 핵심 정보상으로 자리 잡으며 광기 어린 사고를 이어감." }
+    ],
+
+    note:[
+      "MBTI는 ENTP.",
+      "사람들이 소중히 여기는 물건을 몰래 숨겨두고, 그들이 허둥지둥 찾는 모습을 멀리서 관찰하는 것을 즐긴다.",
+      "단 음식을 극도로 좋아한다.",
+      "주머니 속에 항상 낡은 동전 하나를 넣고 다니며, 결정을 내릴 때마다 운에 맡기는 척하며 재미를 본다.",
+      "일부러 엉뚱한 거짓말을 섞어 말하는 버릇이 있다."
+    ]
   },
+
 
   {
     name:"에단 콜",
@@ -418,7 +514,8 @@ const characters = [
 그녀의 예민한 감각은 일상의 사소한 자극조차 견디기 힘든 소음으로 치환한다. 이러한 심리적 과부하는 그녀를 수시로 무력감을 느끼게 한다. 혼자 있을 때면 깊은 어둠 속으로 가라앉는 듯한 공허함을 느끼며, 스스로를 벼랑 끝으로 몰아넣는 충동적인 행동을 하기도 한다.
 
 내면에는 누군가의 온기를 갈구하는 어린아이가 살고 있다. 그녀는 세상이 자신을 버렸다고 생각하면서도, 그 세상의 아주 작은 다정함에 손을 뻗고 싶어 하는 모순을 안고 있다.`,
-    stories:{
+     
+   stories:{
       1:`2006년 12월 1일, 부산의 차가운 겨울바람이 창문을 두드리던 날 그녀가 태어났다.
 
 어린이집에 다니던 시절까지, 그녀는 웃음이 많은 아이였다.
@@ -630,11 +727,44 @@ const relations = {
   ],
 
   "Lucio Esposito":[
-    { target:"Ginevra Jin Moretti", label:"연인", myThought:"" }
+    { target:"Ginevra Jin Moretti", label:"연인", myThought:"" },
+    { target:"Tonante Zeno", label:"동료", myThought:"" },
+    { target:"Yuri · Pyrrhus", label:"동료", myThought:"" },
+    { target:"Fixer", label:"혐오", myThought:"" },
+    { target:"Chase", label:"혐오", myThought:"" }
+  ],
+
+  "Yuri · Pyrrhus":[
+    { target:"Chase", label:"연인", myThought:"" },
+    { target:"Fixer", label:"혐오", myThought:"" },
+    { target:"Lucio Esposito", label:"동료", myThought:"" },
+    { target:"Tonante Zeno", label:"동료", myThought:"" }
+  ],
+
+  "Chase":[
+    { target:"Yuri · Pyrrhus", label:"연인", myThought:"" },
+    { target:"Fixer", label:"동료", myThought:"" },
+    { target:"Tonante Zeno", label:"부하", myThought:"" },
+    { target:"Lucio Esposito", label:"부하", myThought:"" }
+  ],
+
+  "Tonante Zeno":[
+    { target:"Fixer", label:"연인", myThought:"" },
+    { target:"Chase", label:"혐오", myThought:"" },
+    { target:"Lucio Esposito", label:"동료", myThought:"" },
+    { target:"Yuri · Pyrrhus", label:"동료", myThought:"" }
+  ],
+
+  "Fixer":[
+    { target:"Tonante Zeno", label:"연인", myThought:"" },
+    { target:"Yuri · Pyrrhus", label:"동료", myThought:"" },
+    { target:"Chase", label:"동료", myThought:"" },
+    { target:"Lucio Esposito", label:"부하", myThought:"" }
   ],
 
   "異瑞浚":[
-    { target:"徐莉安", label:"연인", myThought:"" }
+    { target:"徐莉安", label:"연인", myThought:"" },
+    { target:"姜娜允", label:"후배", myThought:"" }
   ],
 
   "徐莉安":[
@@ -719,20 +849,8 @@ const relations = {
 
 "나윤아, 나 요즘 학교 오는 게 예전보다 훨씬 즐거워."`
       }
-    }
-  ],
-
-  "Yuri · Pyrrhus":[
-    { target:"Chase", label:"연인", myThought:"" },
-    { target:"Fixer", label:"동료", myThought:"" }
-  ],
-
-  "Chase":[
-    { target:"Yuri · Pyrrhus", label:"연인", myThought:"" }
-  ],
-
-  "Fixer":[
-    { target:"Yuri · Pyrrhus", label:"동료", myThought:"" }
+    },
+    { target:"異瑞浚", label:"선배", myThought:"" }
   ]
 
 };
@@ -834,14 +952,14 @@ function renderCharacters(data, page = 1){
         char.timeline.forEach(item=>{
           timelineContainer.innerHTML += `
             <div class="timeline-item">
-              <div class="year">${item.date}</div>
+              <div class="year">${parseCensor(item.date)}</div>
               <div class="timeline-text">${parseCensor(item.content)}</div>
             </div>
           `;
         });
       }
 
-      document.getElementById("detailPersonality").textContent = char.personality || "";
+      document.getElementById("detailPersonality").innerHTML = parseCensor(char.personality || "");
 
       const tagArea = document.getElementById("detailTags");
       tagArea.innerHTML = "";
@@ -875,6 +993,9 @@ function renderCharacters(data, page = 1){
         overlay.style.display = "block";
       }else if(char.region === "Missouri"){
         overlay.src = "https://imgur.com/hqDfldE.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Abruzzo"){
+        overlay.src = "https://imgur.com/xGyHnjT.png";
         overlay.style.display = "block";
       }else{
         overlay.style.display = "none";
@@ -1106,7 +1227,7 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
         z-index:2;
       ">
         <div style="width:${CARD}px;height:${CARD}px;border:${border};background:#fff url('${img}') center/cover no-repeat;"></div>
-        <div style="font-size:10px;font-weight:bold;word-break:break-word;margin-top:3px;color:#222;">${name}</div>
+        <div style="font-size:8px;font-weight:bold;word-break:break-word;margin-top:3px;color:#222;">${name}</div>
       </div>`;
     }
 
@@ -1292,7 +1413,7 @@ document.addEventListener("click",(e)=>{
   relTimeline.forEach(item=>{
     innerHTML += `
       <div class="timeline-item">
-        <div class="year">${item.date}</div>
+        <div class="year">${parseCensor(item.date)}</div>
         <div class="timeline-text">${parseCensor(item.content)}</div>
       </div>
     `;
