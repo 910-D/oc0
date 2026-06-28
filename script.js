@@ -1,5 +1,6 @@
 let currentCharacter = null;
 let currentRelationStories = {};
+let cachedRelationPositions = {};
 
 const worldData = {
 
@@ -25,6 +26,12 @@ const worldData = {
     title:"SOUTH KOREA",
     year:"2024",
     map:"https://i.imgur.com/I8JjMjn.png"
+  },
+
+  "영국":{
+    title:"UNITED KINGDOM",
+    year:"2024",
+    map:"https://imgur.com/9UL6SVm.png"
   }
 
 };
@@ -37,7 +44,7 @@ const countryData = {
 
   "ㅁ":["미국"],
 
-  "ㅇ":["이탈리아"]
+  "ㅇ":["이탈리아", "영국"]
 
 };
 
@@ -809,6 +816,67 @@ stories:{
     region:"Busan",
     commissioner:"",
     image:""
+  },
+
+  {
+    name:"徐多仁",
+    koreanName:"카텐 / 서 다인",
+    country:"대한민국",
+    age:"17",
+    gender:"여성",
+    height:"161cm",
+    nationality:"KR, Busan",
+    job:"고등학생",
+    region:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"柳理佩",
+    koreanName:"류 리페",
+    country:"대한민국",
+    age:"18",
+    gender:"여성",
+    height:"165cm",
+    nationality:"KR, Sejong",
+    job:"고등학생",
+    region:"Sejong",
+    currentRegion:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"安脩娥",
+    koreanName:"안 수아",
+    country:"대한민국",
+    age:"17",
+    gender:"여성",
+    height:"162cm",
+    nationality:"KR, Busan",
+    job:"고등학생",
+    region:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"李世雅",
+    koreanName:"스노리 / 이 세아",
+    country:"대한민국",
+    mapCountry:"영국",
+    region:"England",
+    currentMapCountry:"대한민국",
+    currentRegion:"Busan",
+    age:"17",
+    gender:"여성",
+    height:"160cm",
+    nationality:"GB, London",
+    job:"고등학생",
+    
+    commissioner:"",
+    image:""
   }
 
 ];
@@ -959,6 +1027,7 @@ const relations = {
 
   "異瑞浚":[
     { target:"徐莉安", label:"연인", myThought:"" },
+    { target:"李道賢", label:"선배", myThought:"" },
     { target:"姜娜允", label:"후배", myThought:"" }
   ],
 
@@ -969,7 +1038,14 @@ const relations = {
 계단에서 발을 헛디딘 나윤을 보며 많이 허둥대는 아이인가? 라는 생각을 먼저 했다. 그러나 나윤과 시간을 보내보니 꽤 당찬 아이라고 생각했다. 자신이 학교에서는 긴장하고 있다는 걸 알고 나윤이 맞춰주고 있는 것 같다고 느꼈다. 은근히 허둥대는 모습을 꽤 귀여워하고 있다.` }
   ],
 
+  "李道賢":[
+    { target:"姜娜允", label:"연인", myThought:"" },
+    { target:"異瑞浚", label:"후배", myThought:"" },
+    { target:"白細拏", label:"친구", myThought:"" }
+  ],
+  
   "姜娜允":[
+    { target:"李道賢", label:"연인", myThought:"" },
     {
       target:"徐莉安",
       label:"선배",
@@ -1045,7 +1121,30 @@ const relations = {
 "나윤아, 나 요즘 학교 오는 게 예전보다 훨씬 즐거워."`
       }
     },
-    { target:"異瑞浚", label:"선배", myThought:"" }
+    { target:"異瑞浚", label:"선배", myThought:"" },
+    { target:"徐多仁", label:"친구", myThought:"" },
+    { target:"安脩娥", label:"친구", myThought:"" }
+  ],
+
+  "潤雪":[
+    { target:"白細拏", label:"연인", myThought:"" }
+  ],
+
+  "白細拏":[
+    { target:"潤雪", label:"연인", myThought:"" },
+    { target:"李道賢", label:"친구", myThought:"" }
+  ],
+
+  "徐多仁":[
+    { target:"姜娜允", label:"친구", myThought:"" }
+  ],
+
+  "安脩娥":[
+    { target:"姜娜允", label:"친구", myThought:"" }
+  ],
+
+  "李世雅":[
+    { target:"姜娜允", label:"친구", myThought:"" }
   ]
 
 };
@@ -1060,16 +1159,65 @@ function findRelationEntry(fromName, toName){
   return list.find(r => r.target === toName) || null;
 }
 
+function getOuterPositions(cx, cy, count, excludePositions = []) {
+  const minDist = 120;
+  const radiusMin = 160, radiusMax = 230;
+  const positions = [];
+
+  for (let i = 0; i < count; i++) {
+    let placed = false;
+
+    for (let attempt = 0; attempt < 400 && !placed; attempt++) {
+      const angle = Math.random() * Math.PI * 2;
+      const radius = radiusMin + Math.random() * (radiusMax - radiusMin);
+      const x = cx + Math.cos(angle) * radius;
+      const y = cy + Math.sin(angle) * radius;
+
+      // 이미 배치된 outer 노드와 겹침 체크
+      const okOuter = positions.every(
+        p => Math.hypot(p.x - x, p.y - y) >= minDist
+      );
+
+      // center 노드(연인/가족) 및 중앙 나 카드와도 겹침 체크
+      const okExclude = excludePositions.every(
+        p => Math.hypot(p.x - x, p.y - y) >= minDist
+      );
+
+      // 중앙(나 카드) 자체와도 겹침 체크
+      const okCenter = Math.hypot(cx - x, cy - y) >= minDist;
+
+      if (okOuter && okExclude && okCenter) {
+        positions.push({ x, y });
+        placed = true;
+      }
+    }
+
+    // 400번 시도해도 못 찾으면 강제 배치 (반지름 늘려서)
+    if (!placed) {
+      const angle = (i / count) * Math.PI * 2;
+      const radius = radiusMax + 60;
+      positions.push({
+        x: cx + Math.cos(angle) * radius,
+        y: cy + Math.sin(angle) * radius
+      });
+    }
+  }
+
+  return positions;
+}
+
 const regionImages = {
   "Lombardia":"https://i.imgur.com/pdOKbmf.png",
   "Campania":"https://i.imgur.com/a0F630G.png",
   "Lazio":"https://imgur.com/lKoIlFo.png",
   "Busan":"https://i.imgur.com/NlL45hs.png",
+  "Sejong":"https://imgur.com/h1tbTk1.png",
   "Gangwon":"https://i.imgur.com/FVwDXnE.png",
   "Illinois":"https://imgur.com/nW5lWDK.png",
   "Missouri":"https://imgur.com/hqDfldE.png",
   "Abruzzo":"https://imgur.com/xGyHnjT.png",
-  "Sicilia":"https://imgur.com/c9B4Ec8.png"
+  "Sicilia":"https://imgur.com/c9B4Ec8.png",
+  "England":"https://imgur.com/VVzECJK.png"
 };
 
 function applyTimeView(char, mode){
@@ -1402,6 +1550,9 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
     const CARD = 80; /* 카드 한 변 */
 
     /* 연인/가족 위치 (중앙 근처) */
+    /* 인원수에 맞춰 원형으로 자동 배치 (겹침 방지) */
+    /* 연인/가족 위치 (중앙 근처) — 고정 4자리 그대로 유지 */
+    /* 연인/가족 위치 (중앙 근처) */
     const centerPos = [
       {x: CX + 160, y: CY},
       {x: CX - 160, y: CY},
@@ -1410,12 +1561,16 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
     ];
 
     /* 외곽 위치 */
-    const outerPos = [
-      {x: CX - 180, y: CY - 150},
-      {x: CX + 180, y: CY - 150},
-      {x: CX - 180, y: CY + 150},
-      {x: CX + 180, y: CY + 150},
-    ];
+    /* 외곽 위치 — 한 번 정해지면 캐릭터별로 고정 */
+    let outerPos;
+    if (cachedRelationPositions[currentCharacter.name]) {
+      outerPos = cachedRelationPositions[currentCharacter.name];
+    } else {
+      // center 노드 위치를 exclude로 넘겨서 겹침 방지
+      const usedCenterPositions = centerRels.map((r, i) => centerPos[i % centerPos.length]);
+      outerPos = getOuterPositions(CX, CY, outerRels.length, usedCenterPositions);
+      cachedRelationPositions[currentCharacter.name] = outerPos;
+    }
 
     graph.style.position = "relative";
     graph.style.width    = W + "px";
@@ -1510,10 +1665,18 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
 
     let html = "";
 
+    function getCenterPos(i) {
+      return centerPos[i % centerPos.length];
+    }
+
+    function getOuterPos(i) {
+      return outerPos[i] || { x: CX, y: CY };
+    }
+
     /* 선 먼저 */
     const allRels = [
-      ...centerRels.map((r,i) => ({r, pos: centerPos[i] || {x: CX+160, y: CY}})),
-      ...outerRels.map((r,i)  => ({r, pos: outerPos[i]  || {x: CX-180, y: CY-150}})),
+      ...centerRels.map((r,i) => ({r, pos: getCenterPos(i, centerRels.length || 1)})),
+      ...outerRels.map((r,i)  => ({r, pos: getOuterPos(i, outerRels.length || 1)})),
     ];
 
     allRels.forEach(({r, pos}) => {
