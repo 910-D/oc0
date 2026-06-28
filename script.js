@@ -1190,7 +1190,7 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
       /* 카드 가장자리 보정 (CARD/2) */
       const dx = pos.x - CX, dy = pos.y - CY;
       const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-      const r2 = CARD/2 + 3;
+      const r2 = CARD/2 + 10;
       const sx = CX + (dx/dist)*r2, sy = CY + (dy/dist)*r2;
       const ex = pos.x - (dx/dist)*r2, ey = pos.y - (dy/dist)*r2;
 
