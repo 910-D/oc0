@@ -1,0 +1,1324 @@
+let currentCharacter = null;
+let currentRelationStories = {};
+
+const worldData = {
+
+  "캐나다":{
+    title:"CANADA",
+    year:"2024",
+    map:"https://imgur.com/4L3QVx8.png"
+  },
+
+  "미국":{
+    title:"THE U.S",
+    year:"2024",
+    map:"https://imgur.com/ECfDRyz.png"
+  },
+
+  "이탈리아":{
+    title:"ITALIA",
+    year:"2024",
+    map:"https://i.imgur.com/D7CGmE2.png"
+  },
+
+  "대한민국":{
+    title:"SOUTH KOREA",
+    year:"2024",
+    map:"https://i.imgur.com/I8JjMjn.png"
+  }
+
+};
+
+const countryData = {
+
+  "ㄷ":["대한민국"],
+
+  "ㅋ":["캐나다"],
+
+  "ㅁ":["미국"],
+
+  "ㅇ":["이탈리아"]
+
+};
+
+const characters = [
+
+  {
+    name:"Lucio Esposito",
+    koreanName:"루치오 에스포지토",
+    country:"이탈리아",
+    age:"22",
+    gender:"남성",
+    height:"175cm",
+    nationality:"IT, Napoli",
+    job:"마피아 조직원",
+    image:"https://i.imgur.com/YTawsdj.jpg",
+    relationImage:"https://imgur.com/5CTBFqO.png",
+    region:"Campania",
+    commissioner:"요거트 님",
+    tags:[
+      "#능글맞은",
+      "#계획적인",
+      "#상냥한",
+      "#외향적",
+      "#눈치가 빠른"
+    ],
+    personality:`그는 마피아에 속한 조직원이지만 잔혹한 면이 많은 것보단 인간적인 면이 많은 사람이다. 어느 나이대든 상관없이, 타인에게든 공평하게 상냥히 대하며, 외향적이기에 누구 하나 소외되지 않게 친절히 다가간다.
+
+그는 타인 모두에게 공평하게 대하기에, 어느 쪽이든 적이 아닌 이상은 그들에게 미소를 지으며 친절을 베푸는 편이다. 빠르게 판단하는 그의 뇌와 정보를 저장하는 그의 기억력 덕에 상대가 변화하면 어느 부분이 달라졌나를 파악할 수 있다.
+
+평소 보기엔 쓸데없이 관심이 많고, 맨날 웃는 이상한 사람 정도겠지만, 일을 할 때엔 계획적인 판단으로 적의 공격을 피하며, 웃는 그 미소엔 친절과 반대되는 것이 담겨있어 다른 의미로 적에게 두려움을 심어준다.`
+  },
+
+  {
+    name:"Ginevra Jin Moretti",
+    koreanName:"지네브라 진 모레티",
+    country:"이탈리아",
+    age:"21",
+    gender:"여성",
+    height:"170cm",
+    nationality:"IT, Milano",
+    job:"패션디자이너",
+    image:"https://i.imgur.com/lzVEJQe.jpg",
+    relationImage:"https://imgur.com/c06LJg1.png",
+    commissioner:"요거트 님",
+    region:"Lombardia",
+    tags:[
+      "#신중함",
+      "#온화함",
+      "#관조적",
+      "#섬세함",
+      "#내성적"
+    ],
+    personality:`그녀는 패션 디자이너로서 자신의 작품을 대할 때나 타인과 대화할 때나 한결같은 침착함을 유지한다. 타인의 의견을 경청하는 태도는 항상 온화하며, 갈등 상황에서도 감정적으로 대응하기보다는 차분하게 대안을 제시하는 경우가 많다.
+
+그녀는 빗소리가 들리는 창가에 앉아 고요히 스케치를 할 때 가장 자신답다고 느낀다. 쏟아지는 빗줄기를 바라보며 복잡한 생각들을 정리하고, 그 속에서 영감을 길어 올리는 과정은 그녀에게 있어서 단순한 휴식이 아니다.
+
+겉보기에는 더없이 얌전하고 조용하지만, 그 내면에는 자기만의 확고한 미학이 존재한다. 자신을 드러내기보다 타인의 빛을 돋보이게 하는 옷을 만드는 것을 즐기며, 그 과정에서 타인의 기쁨을 발견하는 것을 큰 보람으로 여긴다.`,
+    stories:{
+      1:`2003년 8월 5일, 이탈리아 밀라노의 어느 외곽, 거센 빗줄기가 도시의 소음을 집어삼키던 밤에 그녀가 태어났다.
+
+그녀의 부모님은 유서 깊은 작은 양복점을 운영하던 사람들이었다.
+
+어린 시절의 그녀에게 세상은 바늘과 실, 그리고 헝겊이 사각거리는 소리로 가득한 곳이었다.
+
+부모님은 그녀에게 '옷은 사람을 보호하는 껍질이자, 그 사람의 내면을 비추는 거울'이라고 늘 가르쳤다.
+
+그녀는 비 오는 날 창가에 앉아 떨어지는 빗방울을 세며, 부모님이 재단하는 원단이 만들어내는 우아한 선을 바라보곤 했다.`,
+      2:`그녀가 열다섯 살이 되던 해, 부모님의 양복점은 밀라노의 유행을 선도하는 장인들의 공간으로 서서히 알려지기 시작했다.
+
+그러나 빛이 밝으면 그림자도 짙은 법.
+
+부모님은 우연찮게 밀라노를 근거지로 삼던 마피아 조직의 자금 세탁과 관련된 은밀한 의뢰를 거절했다.
+
+예술을 사랑하는 장인으로서, 그들의 오염된 돈으로 옷을 짓는 일을 받아들일 수 없었기 때문이다.
+
+그녀는 부모님이 그날 밤, 낯선 검은 양복을 입은 자들과 날카로운 언쟁을 벌이는 것을 보았다.
+
+그때까지만 해도 그것이 일시적인 갈등이라 생각했다.
+
+그녀는 그저 방 한구석에서 자신의 디자인 스케치를 이어가며, 언젠가 자신만의 컬렉션을 완성할 날을 꿈꾸고 있었다.`,
+      3:`그녀가 열여덟 살이 되던 어느 가을밤, 예고 없이 비극이 들이닥쳤다.
+
+그날도 어김없이 비가 내리고 있었다.
+
+부모님은 마지막 주문을 확인하러 나갔다가, 끝내 집으로 돌아오지 못했다.
+
+마피아 조직은 자신들의 요구를 끝내 거절한 부모님을 잔인하게 살해했다.
+
+그녀는 경찰에게 사건 현장의 사진을 전해 들었을 때, 비명조차 지를 수 없었다.
+
+현장은 온통 빗물과 뒤섞인 붉은 흔적으로 가득했고, 그곳에 놓여 있던 부모님의 옷감 조각들은 처참하게 찢겨 있었다.
+
+그녀는 자신의 세상이 무너지는 것을 보았다.
+
+그녀는 부모님이 남긴 유일한 유산인 가위와 바늘을 쥐고, 홀로 세상에 남겨졌다.`,
+      4:`그녀는 밀라노의 화려한 패션계에 뛰어들었다.
+
+하지만 그것은 순수한 예술을 위한 것이 아니었다.
+
+그녀는 부모님을 죽인 마피아 조직이 사회의 상류층과 깊숙이 연결되어 있다는 것을 알아냈고, 패션 디자이너라는 직업을 무기로 그들의 사교계에 잠입했다.
+
+그녀는 화려한 드레스 안에 독이 든 바늘을 숨기거나, 타겟의 옷에 몰래 도청 장치를 심는 등 자신만의 조용한 방식으로 복수를 준비했다.
+
+그렇게 그녀는 패션 디자이너로서 정점에 서는 동시에, 그들의 몰락을 지켜보는 관찰자가 되었다.`,
+      5:`결국 그 마피아 조직은 그녀가 설계한 거대한 스캔들에 휘말렸다.
+
+우두머리들이 경찰의 손에 넘겨지고, 그들의 부패한 권력이 패션계에서 완전히 매장되던 날, 그녀는 밀라노의 거리를 걸었다.
+
+모든 복수가 끝났지만, 그녀의 마음 한구석에 남은 공허함은 쉬이 채워지지 않았다.
+
+그녀는 이제 자신의 이름으로 된 브랜드의 디자이너로서, 오직 옷 그 자체에 집중하기로 마음먹었다.
+
+그녀는 다시 빗소리를 사랑하게 되었다.
+
+<br><br>
+
+<span class="story-quote">
+「 이제 다 끝났어. 빗줄기가 멈춘 밀라노의 거리를 걷는 기분이야. 」
+</span>`
+    },
+    timeline:[
+      { date:"2003.08.05", content:"밀라노 외곽의 작은 양복점에서 출생" },
+      { date:"2018.05.12", content:"부모님의 의뢰 거절 사건 발생. 마피아와 갈등 시작." },
+      { date:"2021.10.20", content:"부모님의 피살. 세상에 홀로 남겨짐." },
+      { date:"2022.04.09", content:"패션 디자이너로 본격적인 활동 시작 및 복수 계획 착수." },
+      { date:"2023.02.14", content:"마피아 조직의 비리를 폭로하여 조직 와해 성공." },
+      { date:"2023.12.25", content:"복수를 끝내고 오롯이 자신의 패션 세계에 집중하는 삶 정착." }
+    ],
+    note:[
+      "MBTI는 INTJ.",
+      "디저트 중에서는 크레이프 케이크를 가장 좋아한다.",
+      "비 오는 날에는 카페 창가 자리에 앉아 빗소리를 들으며 차를 마신다.",
+      "잠들기 전에는 그날 하루 동안 떠오른 영감이나 드로잉 아이디어를 수첩에 정리한다."
+    ]
+  },
+
+  {
+    name:"Chase",
+    koreanName:"체이스",
+    country:"이탈리아",
+    age:"27",
+    gender:"남성",
+    height:"178cm",
+    nationality:"",
+    job:"마피아 조직원",
+    region:"",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"Yuri · Pyrrhus",
+    koreanName:"유리 · 피로스",
+    country:"이탈리아",
+    mapCountry:"미국",
+    region:"Illinois",
+    age:"23",
+    gender:"여성",
+    height:"165cm",
+    nationality:"&US, Chicago&",
+    job:"마피아 해커",
+    commissioner:"",
+    image:"",
+    tags:[
+      "#냉정함",
+      "#독립적인",
+      "#신중함",
+      "#집중력이 있는",
+      "#방어적인"
+    ],
+    personality:`그녀는 타인과의 감정적 교류를 철저히 배제하는 냉정함을 가지고 있다. 상황을 마주할 때 감정에 휘둘리기보다는 이성을 유지하고 상황을 분석하며, 불필요한 사담을 경계한다. 이에 따라 그녀가 타인에게 쉽게 곁을 내주지 않는 차가운 인상을 만들며, 어떠한 비극적 상황이나 급박한 위기 속에서도 동요하지 않고 상황을 객관적으로 응시할 수 있게 한다. 그녀에게 있어 감정은 문제 해결의 방해 요소일 뿐이다.
+
+타인의 도움이나 간섭을 거부하는 독립적인 태도는 그녀가 가진 가장 큰 특징 중 하나이다. 어떤 임무가 주어졌을 때 외부의 잡음을 완벽히 차단하고 몰입하는 능력은 그 누구도 그녀를 따라올 수 없다. 그녀는 자신의 에너지를 오직 임무에만 집중시키며, 임무 과정에서 일어나는 미세한 변화를 감지할 만큼 뛰어난 집중력을 가지고 있다.
+
+그녀는 매사에 신중함을 유지하며, 스스로를 보호하기 위해 방어적인 태도를 보인다. 자신의 정보를 타인에게 노출하는 것을 극도로 꺼리며, 모든 인간관계에서 물리적, 심리적 거리를 확보하는 것은 필수다.`,
+    stories:{
+      1:`2001년 11월 22일, &미국 시카고의 차가운 뒷골목&, 매서운 겨울바람이 몰아치던 날에 그녀가 태어났다.
+
+&부모의 얼굴조차 기억하지 못한 채 유년 시절을 보낸& 그녀에게 &시카고의 좁고 어두운 골목길&은 유일한 안식처이자 생존할 장소였다.
+
+하루하루를 생존하기 위해 고생하던 시절, 그녀는 타인에게 의존하는 것이 얼마나 무의미한지 뼈저리게 깨달으며 자라났다.
+
+누구도 그녀를 지켜주지 않았기에 스스로를 보호하는 법을 스스로 깨달았고, 타인을 경계하는 방어적인 태도는 이제 그녀의 일부분으로 자리 잡았다.`,
+
+      2:`그녀는 생존을 위해 악착같이 모은 돈으로 고철에 가까운 낡은 노트북 한 대를 손에 넣었다.
+
+사람들과 섞이는 대신 디지털 세계에 빠져든 그녀는, 그 안에서 비로소 진정한 자신을 발견할 수 있었다.
+
+독학으로 시작한 &해킹은 세상의 시스템을 분석하고 자신의 의지대로 조작할 수 있다는 강력한 기분을 느끼게 해주었다&.
+
+그녀는 &모니터 앞의 숫자와 코드들&에 엄청난 집중력을 발휘하며, 현실 세계의 비참함을 잊은 채 사이버 공간을 바라보는 일에 깊이 몰두했다.`,
+
+      3:`그녀의 실력이 암암리에 알려지기 시작하면서, 겉잡을 수 없는 위험이 도사리기 시작했다.
+
+단순히 돈을 벌기 위해 시작했던 &디지털 정보 탈취&가 점차 거대한 조직들과 얽히며 그녀를 표적으로 만들기 시작한 것이다.
+
+한 번도 누군가에게 추적당한 적 없던 그녀의 보안망이 흔들리기 시작하고, &시카고의 은신처들&은 차례로 발각되었다.
+
+냉정한 판단력으로 상황을 모면하려 했으나, 좁혀오는 포위망 속에서 그녀는 혼자의 힘만으로는 도저히 감당할 수 없는 일을 실감해야 했다.`,
+
+      4:`그녀의 삶을 뒤흔든 결정적인 사건은 이탈리아에서 온 의문의 한 여자로부터 시작되었다.
+
+그녀의 &해킹 실력&과 차가운 이성, 그리고 극도의 방어 기제 뒤에 숨겨진 천재적인 분석력을 눈여겨본 여자는, 추적을 피해 숨어있던 그녀의 거처를 정확히 찾아냈다.
+
+그 여자는 &시카고의 골목&에서 썩기에는 아까운 재능이라며 그녀에게 새로운 신분과 환경을 보장하겠다는 제안을 건넸다.
+
+제안에 거절을 하려던 그녀는, 현재의 위기에서 벗어날 유일한 탈출구가 그 여자의 손에 쥐어져 있음을 직감했다.
+
+결국, 그녀는 자신의 모든 것을 버리고 이탈리아라는 땅으로 떠나는 위험한 도박을 하기로 결정했다.`,
+
+      5:`이탈리아에 도착한 그녀는 이전과는 완전히 다른 삶의 모습을 맞이하게 되었다.
+
+&시카고의 지저분한 골목& 대신 고풍스럽지만 서늘한 이국땅에서, 그녀는 여전히 자신의 정체를 숨긴 채 철저히 냉정함을 유지하고 있다.
+
+과거의 일과 해킹 기술은 그녀를 더욱 신중하게 만들었다.
+
+<br><br>
+
+<span class="story-quote">
+「 당신네들의 분석력은 내 예상보다 훨씬 형편없군. 」
+</span>`
+    },
+    timeline:[
+      { date:"2001.11.22", content:"&시카고의 매서운 겨울&, 고독 속에서 태어남." },
+      { date:"2011.05.10", content:"&부모 없는 시카고 뒷골목에서& 생존 중." },
+      { date:"2015.08.15", content:"모은 돈으로 낡은 노트북을 구매, &해킹을 하기 시작함&." },
+      { date:"2018.11.22", content:"&디지털 범죄 연루&로 인한 추적이 시작되며 &은신처가 노출&됨." },
+      { date:"2019.04.12", content:"대규모 포위망 속에서 모든 흔적을 삭제하고 도주를 시도." },
+      { date:"2020.11.22", content:"이탈리아 여자의 제안을 수락하며 새로운 신분과 삶을 선택함." }
+    ],
+    note:[
+      "MBTI는 ISTJ.",
+      "늘 노트북을 가지고 다닌다.",
+      "매일매일 주로 붉은 색의 사탕을 먹고 있다.",
+      "밤에는 눈동자가 빛난다.",
+      "복장은 터틀넥과 정장을 선호한다."
+    ]
+  },
+
+  {
+    name:"Fixer",
+    koreanName:"정보상",
+    country:"이탈리아",
+    mapCountry:"미국",
+    region:"Missouri",
+    age:"&21&",
+    gender:"여성",
+    height:"175cm",
+    nationality:"&US, St. Louis&",
+    job:"마피아 정보상",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"에단 콜",
+    country:"미국",
+    age:"29",
+    gender:"남성",
+    height:"183cm",
+    nationality:"US, New York",
+    job:"변호사",
+    image:""
+  },
+
+  {
+    name:"소피아 레인",
+    country:"미국",
+    age:"25",
+    gender:"여성",
+    height:"167cm",
+    nationality:"US, Los Angeles",
+    job:"사진작가",
+    image:""
+  },
+
+  {
+    name:"마커스 윌",
+    country:"미국",
+    age:"31",
+    gender:"남성",
+    height:"179cm",
+    nationality:"US, Chicago",
+    job:"건축가",
+    image:""
+  },
+
+  {
+    name:"엘리 포드",
+    country:"미국",
+    age:"22",
+    gender:"여성",
+    height:"162cm",
+    nationality:"US, Seattle",
+    job:"대학생",
+    image:""
+  },
+
+  {
+    name:"루카스 베넷",
+    country:"캐나다",
+    age:"28",
+    gender:"남성",
+    height:"182cm",
+    nationality:"CA, Toronto",
+    job:"의사",
+    image:""
+  },
+
+  {
+    name:"클로에 마틴",
+    country:"캐나다",
+    age:"24",
+    gender:"여성",
+    height:"168cm",
+    nationality:"CA, Vancouver",
+    job:"작가",
+    image:""
+  },
+
+  {
+    name:"노아 챔버스",
+    country:"캐나다",
+    age:"30",
+    gender:"남성",
+    height:"177cm",
+    nationality:"CA, Montreal",
+    job:"음악가",
+    image:""
+  },
+
+  {
+    name:"이블린 쇼",
+    country:"캐나다",
+    age:"21",
+    gender:"여성",
+    height:"165cm",
+    nationality:"CA, Calgary",
+    job:"대학생",
+    image:""
+  },
+
+  {
+    name:"異瑞浚",
+    koreanName:"이 서준",
+    country:"대한민국",
+    age:"18",
+    gender:"남성",
+    height:"180cm",
+    nationality:"KR, Busan",
+    job:"고등학생",
+    region:"Busan",
+    commissioner:"요거트 님",
+    image:"https://imgur.com/D9b96Wa.png"
+  },
+
+  {
+    name:"徐莉安",
+    koreanName:"서 리안",
+    country:"대한민국",
+    age:"18",
+    gender:"여성",
+    height:"164cm",
+    nationality:"KR, Busan",
+    job:"고등학생",
+    region:"Busan",
+    commissioner:"요거트 님",
+    image:"https://imgur.com/f4fXVmd.png",
+    tags:[
+      "#경계하는",
+      "#불안정한",
+      "#자기파괴적",
+      "#애정결핍",
+      "#예민함"
+    ],
+    personality:`그녀는 세상의 속도를 온전히 감당하기엔 너무나도 위태롭다. 부모의 이혼으로 인해 어린 시절부터 방치되다시피 했던 그녀의 내면에는 '관계는 결국 무너진다'는 비관적인 생각이 깊게 뿌리 박혀 있다. 할머니의 헌신적인 사랑 속에서 자라났으나, 그녀는 그 사랑마저도 언제든 사라질지 모르는 일시적인 것으로 치부하며 마음을 온전히 열지 못한다. 그녀에게 있어 인간관계란 언젠가 찾아올 이별을 준비해야 하는 불안한 과정일 뿐.
+
+그녀의 예민한 감각은 일상의 사소한 자극조차 견디기 힘든 소음으로 치환한다. 이러한 심리적 과부하는 그녀를 수시로 무력감을 느끼게 한다. 혼자 있을 때면 깊은 어둠 속으로 가라앉는 듯한 공허함을 느끼며, 스스로를 벼랑 끝으로 몰아넣는 충동적인 행동을 하기도 한다.
+
+내면에는 누군가의 온기를 갈구하는 어린아이가 살고 있다. 그녀는 세상이 자신을 버렸다고 생각하면서도, 그 세상의 아주 작은 다정함에 손을 뻗고 싶어 하는 모순을 안고 있다.`,
+    stories:{
+      1:`2006년 12월 1일, 부산의 차가운 겨울바람이 창문을 두드리던 날 그녀가 태어났다.
+
+어린이집에 다니던 시절까지, 그녀는 웃음이 많은 아이였다.
+
+부모님은 항상 그녀의 손을 잡고 해운대의 모래사장을 거닐었고, 그녀는 파도 소리를 자장가 삼아 잠들곤 했다.
+
+부모님은 다정했고, 그녀는 사랑받는다는 확신 속에 자랐다.
+
+세상이 영원히 아름다울 것이라 그녀는 그렇게 믿었다.`,
+      2:`그녀가 일곱 살이 되던 해, 집 안에는 매일 밤 고성만 오갔다.
+
+부모님은 끝없는 말다툼 끝에 이혼을 선택했고, 그녀는 그 소란 속에서 낡은 인형을 껴안고 구석에 웅크리는 법을 배웠다.
+
+어머니는 떠났고, 아버지는 일에 파묻혀 그녀를 방치했다.
+
+결국 그녀는 부산의 오래된 빌라에 사는 할머니의 손에 맡겨졌다.
+
+화목했던 가정이 산산조각 나던 그날의 소리는 리안의 마음속에서 영원히 지워지지 않는다.`,
+      3:`아버지를 보며 느꼈던 신뢰는 증오와 두려움으로 바뀌었고, 어른이라는 존재를 언제든 등 돌리고 떠날 수 있는 불안한 생명체로 인식하기 시작했다.
+
+그녀가 중학교에 입학할 무렵, 아버지는 속죄하듯 부산의 꽤 번듯한 아파트 한 채를 남기고 연락을 끊었다.
+
+할머니와 함께 이사한 그 아파트는 겉보기에 더없이 안락했지만, 그녀에게는 거대한 감옥과 다름없었다.
+
+이제 그녀는 나이 든 어른들, 즉 연상에 대한 공포와 강박에 시달렸다.`,
+      4:`또래 친구들에게는 밝고 다정한 모습으로 자신을 숨겼지만, 혼자 남겨진 방 안에서는 거울을 보며 스스로를 할퀴거나 자책하는 자기 파괴적인 행동을 반복했다.
+
+학교에서는 또래들과 어울리며 웃고 떠들지만, 교문 밖을 벗어나 어른들이 있는 곳으로 향할 때면 그녀의 호흡은 가빠진다.
+
+우연히 마주친 낯선 어른이 길을 물어보기만 해도 리안은 온몸을 떨며 뒷걸음질 친다.
+
+그녀의 애정결핍은 때론 너무나도 지독해서, 또래 친구들이 조금만 거리를 두려 해도 세상이 끝난 것처럼 절망한다.`,
+      5:`그러면서도 정작 자신을 향한 진짜 애정은 두려워 밀어내 버리는 모순적인 태도를 보인다.
+
+그녀는 화려한 아파트 거실에 앉아, 창밖으로 보이는 부산의 야경을 무심하게 내려다본다.
+
+그녀는 여전히 어른을 두려워하고, 밤마다 불 꺼진 방에서 불안을 먹고 자란다.
+
+하지만 한 가지 달라진 점이 있다면, 그녀는 이제 자신이 '불안정한 사람'이라는 것을 스스로 인정하기 시작했다는 것.
+
+할머니가 끓여준 따뜻한 국을 먹고, 내일은 친구들과 함께 바다를 보러 가기로 약속했다.
+
+세상은 여전히 두렵고 그녀는 언제든 무너질 수 있는 존재이지만, 적어도 오늘은 스스로를 파괴하지 않고 견뎌보기로 마음먹는다.
+
+<br><br>
+
+<span class="story-quote">
+「 ··· 아니, 아니야. 다들 나보고 뭘 어쩌라는 건데? 내가 이상한 거야···? 내가 잘못한 거야?! 」
+</span>`
+    },
+    timeline:[
+      { date:"2006.12.01", content:"부산에서 탄생. 가족과 함께 평온한 유년기 시작." },
+      { date:"2015.03.10", content:"부모님의 이혼 결정. 가정 내 잦은 다툼과 방치 시작." },
+      { date:"2016.08.22", content:"부모님과의 완전한 이별. 할머니와 함께 살기 시작함." },
+      { date:"2021.05.15", content:"아버지로부터 아파트를 받음." },
+      { date:"2023.09.30", content:"연상에 대한 극심한 공포와 불안 증세로 정신적 위기를 겪음." },
+      { date:"2024.06.16", content:"또래들과의 관계 속에서 겨우 삶의 끈을 부여잡으며 위태로운 일상을 유지." }
+    ],
+    note:[
+      "MBTI는 INFP.",
+      "학교 선배를 두려워하며, 눈이 마주치면 숨으려 한다.",
+      "방에서는 늘 블라인드를 내리고 불도 끄고 지낸다. 스탠드 불빛 하나에 의존하는 중.",
+      "불안할 때마다 자신의 팔을 세게 붙잡는다.",
+      "종종 밤에 혼자서 바다로 갈 때가 있다."
+    ]
+  },
+
+  {
+    name:"이도현",
+    country:"대한민국",
+    age:"27",
+    gender:"남성",
+    height:"181cm",
+    nationality:"KR, Daegu",
+    job:"경찰",
+    image:""
+  },
+
+  {
+    name:"姜娜允",
+    koreanName:"강 나윤",
+    country:"대한민국",
+    age:"17",
+    gender:"여성",
+    height:"163cm",
+    nationality:"KR, Gangwon",
+    job:"고등학생",
+    region:"Gangwon",
+    commissioner:"",
+    image:"",
+    tags:[
+      "#낙천적",
+      "#배려심 있는",
+      "#유연함",
+      "#성실함",
+      "#외유내강"
+    ],
+    personality:`그녀는 마치 맑게 갠 날의 햇살처럼 주변을 환하게 밝힌다. 17세라는 나이에 걸맞은 천진함과 동시에, 자신을 낮추고 상대를 배려할 줄 아는 성숙함을 겸비했다. 어떤 상황에서도 미소를 잃지 않는 강한 긍정의 에너지를 가졌는데, 이는 세상 물정을 몰라서가 아니라 아픈 시절을 겪으며 단단해진 결과다. 그녀는 타인에게 곁을 내주는 데 질색하지 않으며, 사람과 사람 사이의 온기를 가장 소중한 가치로 여긴다.
+
+부모님으로부터 물려받은 섬세한 손재주는 그녀의 또 다른 정체성이다. 무언가를 꼼꼼하게 만들고 고치는 과정을 즐기며, 이런 정교함은 타인의 미묘한 기분을 읽어내는 공감 능력으로도 이어진다. 그녀는 갈등을 싫어해서 자신의 아픔을 스스로 삼키기도 하지만, 결코 비굴해지지는 않는다. 오히려 타인에게는 관대하되 스스로에게는 엄격한 태도를 유지하며, 자신의 밝은 기운으로 다른 사람들의 상처가 치유되길 바란다.
+
+그녀는 누군가에게 짐이 되지 않기 위해 슬픔을 웃음 뒤로 숨기는 법을 익혔고, 그 과정에서 남모를 성장을 거듭해 왔다. 세상이 자신을 어떻게 대하든 그에 굴하지 않고 다정함을 선택하는 것은 그녀가 선택한 생존 방식이다. 요컨대 그녀는 타인의 어둠을 따뜻한 햇살로 감싸 안을 줄 아는, 내면이 참으로 단단하고 아름다운 사람이다.`,
+    stories:{
+      1:`2007년 5월 5일, 강릉의 따스한 봄 햇살 속에서 그녀가 태어났다.
+
+부모님은 공예품을 만드는 장인들로, 늘 밝고 에너지가 넘치는 분들이었다.
+
+그녀는 그런 부모님의 사랑을 듬뿍 받으며, 부모님의 작업실에서 그들의 손길을 보고 자랐다.
+
+그녀가 무엇을 만들어도 남들보다 정교했고, 누구에게나 웃음을 잃지 않는 아이였다.
+
+그녀에게 세상은 부모님이 만들어주던 작은 나무 인형들처럼 아기자기하고 안전한 곳이었다.
+
+어린 시절의 그녀는 모든 이의 사랑을 받고 자란 아이였고, 부모님과 함께 나누는 일상은 항상 빛으로 가득했다.`,
+      2:`중학교에 입학하자마자 그녀의 세상은 미묘하게 뒤틀리기 시작했다.
+
+밝고 착한 성격에 공부와 손재주까지 좋은 그녀를 향해 친구들은 묘한 시선을 보내기 시작했다.
+
+대놓고 괴롭히는 일은 없었으나, 단체 채팅방에서 그녀만 제외되거나 함께 점심을 먹다가도 그녀가 다가가면 조용히 자리를 뜨는 방식의 괴롭힘이 시작되었다.
+
+부모님을 닮아 낙천적인 그녀였지만, 영문도 모른 채 홀로 남겨지는 시간은 견디기 힘들었다. 하지만 그녀는 부모님께 티를 내지 않았다.
+
+늘 행복하게 웃으시는 부모님이 자신의 아픔 때문에 웃음을 잃으실까 봐, 집으로 돌아오면 언제나처럼 밝게 웃으며 거짓된 하루를 보고했다.`,
+      3:`시간이 흐를수록 괴롭힘의 강도는 교묘해졌다.
+
+그녀가 정성껏 만든 물건들은 어느새 교실 구석에 처박혀 있기 일쑤였고, 그녀의 친절은 '가식'이라는 이름으로 왜곡되어 돌아왔다.
+
+그녀는 학교에 있는 내내 투명 인간이 된 기분을 느껴야 했다. 하지만 그녀는 단 한 번도 그들에게 화를 내거나 탓하지 않았다.
+
+대신 집에 돌아와 혼자 거울을 보며 연습했다. 내일은 더 밝게 웃어야지, 내일은 더 따뜻하게 다가가야지. 스스로를 다독이며 웃음을 강요하던 날들이 쌓여갔다.
+
+그녀의 마음은 곪아 터져가고 있었지만, 부모님 앞에서만큼은 결코 아픈 기색을 보이지 않는 완벽한 딸이 되려 애썼다.`,
+      4:`중학교 3학년 가을, 부모님의 부산 이직 소식은 그녀에게 구원과도 같았다.
+
+강릉의 그 숨 막히는 교실과 괴롭힘에서 벗어날 수 있다는 사실에 그녀는 눈물을 삼키며 안도했다.
+
+이사를 준비하며 그간 숨겨왔던 자신의 상처를 모두 추억이라는 상자에 깊숙이 처박아두었다.
+
+부산으로 내려와 입학한 고등학교는 이전과는 달랐다.
+
+처음에는 조심스러웠지만, 그녀 특유의 밝은 에너지와 부모님께 물려받은 뛰어난 손재주로 여러 활동에서 두각을 나타내기 시작했다.
+
+진심을 알아주는 친구들이 하나둘 생겨나면서, 그녀는 예전의 활기를 완전히 되찾았다.`,
+      5:`현재, 고등학생이 된 그녀는 누구보다 활기찬 학교생활을 보내고 있다.
+
+과거의 아픔은 그녀를 움츠러들게 하는 대신, 지금 곁에 있는 친구들이 얼마나 소중한지 깨닫게 하는 거름이 되었다.
+
+반 친구들 사이에서 분위기 메이커를 자처하며, 쉬는 시간마다 교실을 웃음바다로 만드는 것이 그녀의 일상이다.
+
+부모님의 따뜻한 사랑을 받고 자란 그녀는 이제 그 사랑을 친구들에게 아낌없이 나누어 준다.
+
+비록 마음 한구석에 서늘했던 기억이 문득 스칠 때도 있지만, 지금 당장 옆에서 어깨동무를 하며 웃어주는 친구들이 있다.
+
+그녀는 오늘도 부산의 따뜻한 햇살 아래, 가장 환한 미소를 지으며 친구들 사이로 달려 나간다.
+
+<br><br>
+
+<span class="story-quote">
+「 다 지난 일이잖아! 이젠 신경 안 쓰는 걸···. 앗, 친구들이 나 찾는다! 이제 가봐야겠어, 또 보자!」
+</span>`
+    },
+    timeline:[
+      { date:"2007.05.05.", content:"강릉에서 탄생. 부모님의 사랑을 듬뿍 받으며 활기차게 성장." },
+      { date:"2020.03.02", content:"중학교 입학. 밝은 성격과 재능 때문에 영문 모를 괴롭힘 경험." },
+      { date:"2022.10.15", content:"부산 이직 결정, 과거를 뒤로하고 이사 준비." },
+      { date:"2023.02.28", content:"부산으로 전학. 처음엔 조심스러웠으나 점차 본연의 밝음 회복." },
+      { date:"2024.05.05", content:"17번째 생일. 반 친구들의 축하 속에서 자신의 자리를 완전히 확립." },
+      { date:"2024.06.20", content:"학교의 분위기 메이커로 완벽 적응" }
+    ],
+    note:[
+      "MBTI는 ENFJ.",
+      "부모님의 작업실에서 쓰다 남은 자투리 나무나 천으로 작은 소품을 만들어 친구들에게 선물하는 게 취미다.",
+      "사람들의 표정을 관찰하는 습관이 있어, 기분이 안 좋아 보이는 친구를 누구보다 빨리 찾아내고 말을 건넨다.",
+      "방 안에는 부모님과 함께 만든 공예품들이 전시되어 있고, 알록달록한 색감으로 꾸며져 있다.",
+      "스마트폰 사진첩은 온통 부모님이나 친구들과 함께 찍은 셀카와 학교에서 있었던 추억들로 가득 차 있다."
+    ]
+  }
+
+];
+
+/* =====================================================
+   관계 색깔 목록
+===================================================== */
+
+const relationColors = {
+  "연인":"#ff69b4",
+  "친구":"#4f8cff",
+  "가족":"#4caf50",
+  "혐오":"#ff4444",
+  "라이벌":"#ff9800",
+  "동료":"#00bcd4",
+  "상관":"#9c27b0",
+  "부하":"#673ab7",
+  "경계":"#ffb300",
+  "존경":"#2e7d32",
+  "짝사랑":"#ff80ab",
+  "선배":"#1976d2",
+  "후배":"#26a69a"
+};
+
+/* =====================================================
+   관계 데이터
+===================================================== */
+
+const relations = {
+
+  "Ginevra Jin Moretti":[
+    { target:"Lucio Esposito", label:"연인", myThought:"" }
+  ],
+
+  "Lucio Esposito":[
+    { target:"Ginevra Jin Moretti", label:"연인", myThought:"" }
+  ],
+
+  "徐莉安":[
+    { target:"姜娜允", label:"후배", myThought:`「 좋은 후배지. 활기찬 모습이 귀여워. 」
+
+계단에서 발을 헛디딘 나윤을 보며 많이 허둥대는 아이인가? 라는 생각을 먼저 했다. 그러나 나윤과 시간을 보내보니 꽤 당찬 아이라고 생각했다. 자신이 학교에서는 긴장하고 있다는 걸 알고 나윤이 맞춰주고 있는 것 같다고 느꼈다. 은근히 허둥대는 모습을 꽤 귀여워하고 있다.` }
+  ],
+
+  "姜娜允":[
+    {
+      target:"徐莉安",
+      label:"선배",
+      myThought:`「 슬퍼 보이는 선배니까, 내가 웃게 해줘야 해! 」
+
+자신을 붙잡아준 후 무척이나 걱정해 준 리안에게 고마워하고 있다. 같이 대화를 주고받으며 나윤은 리안이 학교에서는 늘 기운이 없어 보인다는 것을 깨달았다. 그 이후로 리안이 자신의 교실에 찾아올 때마다 더욱 더 환하게 웃어주는 편이다. 자신 덕분에 웃는 리안을 보면 기분이 좋아지는 것을 느낀다.`,
+      summary:`우연히 계단에서 발생한 작은 사고를 계기로, 접점이 없던 두 사람은 서로의 일상 속으로 자연스럽게 스며들었다. 나윤은 특유의 붙임성과 다정함으로 리안의 닫혔던 마음을 열었고, 리안은 그 온기에 보답한다.\n\n시간이 흐르며 두 사람은 학교에서 서로에게 소중한 존재가 되었다. 나윤은 리안에게 즐거운 일상을 선물하고, 리안은 나윤을 세심하게 살피며 챙겨주는 선후배로서의 이상적인 관계를 만들어냈다. 서로의 다름을 이해하고 일상의 소소한 기쁨을 함께 공유하며, 두 사람은 서로에게 가장 편안한 안식처가 되어주고 있다.`,
+      timeline:[
+        { date:"2024.03.04", content:"계단에서의 첫 만남. 발을 헛디딘 나윤을 리안이 붙잡으며 인연이 시작." },
+        { date:"2024.03.20", content:"나윤의 적극적인 다가감. 복도에서 매일 아침 인사를 나누며 점차 사이가 가까워짐." },
+        { date:"2024.04.15", content:"일상의 공유. 나윤이 리안에게 소소한 간식을 건네며 대화의 빈도가 높아짐." },
+        { date:"2024.05.10", content:"서로의 일과를 묻고 챙기는 것으로 일상적인 학교 생활이 됨." },
+        { date:"2024.06.24", content:"서로를 존중하며 학교에서 가장 편안한 선후배 관계가 됨." }
+      ],
+      stories:{
+        1:`오후의 나른한 햇살이 교실과 복도를 길게 가로지르는 시간이었다.
+
+1학년 교실을 지나 2층 계단을 내려오던 나윤은 마음이 급했는지 발을 헛디뎠다. 몸이 허공으로 붕 뜨며 중심을 잃으려는 찰나, 마침 아래층에서 올라오던 리안이 빠르게 나윤의 팔을 낚아채듯 붙잡았다.
+
+"괜찮아? 어디 다친 데는 없어?"
+
+리안의 목소리는 다급했고, 당혹감과 걱정은 숨길 수 없었다.
+나윤은 제 팔을 움켜쥔 리안의 손끝에서 전해지는 떨림을 느꼈다.
+
+다행히 중심을 잡고 바닥에 제대로 발을 디뎠지만, 나윤은 놀란 가슴을 진정시키느라 한동안 말을 잇지 못했다. 리안은 혹여나 나윤이가 정말로 다치기라도 했을까 봐 꼼꼼히 살피며 말을 이어갔다.
+
+"발목은? 무릎은 괜찮고? 상처는 안 났지? 제대로 서 봐, 발 저린 건 없어?"
+
+평소 조용하던 리안이 이렇게까지 타인의 일에 적극적으로 반응하는 모습은 드물었다.
+
+리안은 나윤의 눈을 똑바로 마주하며 상태를 살폈고, 나윤은 자신을 향해 쏟아지는 리안의 과분한 다정함에 당황하면서도 왠지 모를 묘한 기분을 느꼈다.
+
+"아, 저 완전 괜찮아요! 선배 덕분에 안 다쳤어요. 정말 감사합니다!"
+
+나윤이 안도의 미소를 지어 보였으나, 리안의 당황한 표정은 쉽게 풀리지 않았다. 리안은 나윤의 팔을 잡았던 손을 천천히 놓으면서도 여전히 시선을 떼지 못한 채 나윤의 겉옷에 묻은 먼지를 털어주었다.`,
+
+        2:`나윤은 복도에서 리안을 마주칠 때마다 먼저 다가가 밝게 인사를 하기 시작했다.
+
+굳이 접점을 만들려 애쓰지 않아도 나윤이가 가진 특유의 붙임성은 자연스럽게 리안의 높은 벽을 허물고 있었다. 리안은 여전히 누군가와 긴 대화를 나누는 일에 서툴렀지만, 나윤이 활짝 웃으며 건네는 인사는 차갑게 굳어 있던 리안의 일상에 작은 변화를 주었다.
+
+나윤은 리안이 교실에 앉아 있을 때면 지나가는 길에 간식을 건네거나 가벼운 안부를 묻곤 했다.
+
+"선배, 오늘 날씨 진짜 좋지 않아요?! 점심시간에 잠깐 햇볕이나 쬐러 가요!"
+
+나윤은 대답을 기다리기보다 이미 결정된 일인 양 눈을 반짝이며 리안의 반응을 살폈다.
+
+당황한 리안은 눈동자를 굴리며 어찌할 바를 몰라 했으나, 나윤의 해맑은 눈빛을 보니 거절할 명분을 찾지 못했다. 사실 리안은 사람들 틈에 섞이는 것을 죽기보다 싫어했지만, 나윤이가 옆에 서 있으면 이상하게도 불안한 마음이 조금씩 잦아들었다.
+
+마치 나윤이 뿜어내는 햇살 같은 힘이 리안의 어두운 구석까지 스며드는 듯했다.
+
+나윤은 리안의 침묵을 어색해하지 않았고, 그저 곁에서 재잘거리며 오늘 학교에서 있었던 소소한 일들을 들려주었다. 나윤의 적극적인 태도는 때론 리안이에게 당혹감을 주기도 했지만, 그것은 곧 설렘으로 변해갔다.
+
+리안은 나윤이 건네준 작은 간식 봉지를 만지작거리며 생각했다. 이 아이는 왜 나 같은 사람에게 이렇게 다정할까. 나윤은 리안이 머뭇거리는 이유를 굳이 캐묻지 않았다.
+
+그저 리안이 조금이라도 편안해질 수 있도록, 학교 생활의 소소한 재미를 함께 나누려고 노력했다.`,
+
+        3:`두 사람의 관계는 복도를 지나가는 누구나 알아챌 만큼 자연스러워졌다.
+
+학교에서의 리안이는 예전처럼 교실에 가만히 있지 않았다. 오히려 쉬는 시간만 되면 1학년 교실 앞을 기웃거리며 나윤을 찾았다. 나윤이 또한 리안의 발소리가 들리면 마치 약속이라도 한 것처럼 교실 밖으로 튀어나와 밝게 손을 흔들었다.
+
+두 사람이 함께 서 있는 모습은 교내의 익숙한 풍경이 되었고, 리안은 나윤의 앞에서는 눈에 띄게 환하게 웃었다.
+
+"선배, 오늘도 왔네!"
+
+나윤이 장난스럽게 웃는다. 리안은 예전의 어색하고 굳어 있던 표정이 보이지 않았다. 리안은 나윤이가 학교에서 겪은 소소한 사건들을 하나하나 세심하게 들어주며, 때로는 과할 정도로 나윤을 챙겼다.
+
+오후 수업이 길어질 것 같으면 당 떨어지지 말라며 미리 사둔 초콜릿을 슬며시 건네는 일은 이제 일상.
+
+두 사람 사이에는 더 이상 어색함 따위는 존재하지 않았다. 어느 날 방과 후, 노을이 길게 늘어지는 운동장 벤치에 나란히 앉아 있던 두 사람은 아무런 말 없이 평온했다.
+
+리안은 나윤의 머리카락에 앉은 먼지를 조심스럽게 털어내며 말한다.
+
+"나윤아, 나 요즘 학교 오는 게 예전보다 훨씬 즐거워."`
+      }
+    }
+  ],
+
+  "Yuri · Pyrrhus":[
+    { target:"Chase", label:"연인", myThought:"" },
+    { target:"Fixer", label:"동료", myThought:"" }
+  ],
+
+  "Chase":[
+    { target:"Yuri · Pyrrhus", label:"연인", myThought:"" }
+  ],
+
+  "Fixer":[
+    { target:"Yuri · Pyrrhus", label:"동료", myThought:"" }
+  ]
+
+};
+
+/* =====================================================
+   도우미 함수
+===================================================== */
+
+function findRelationEntry(fromName, toName){
+  const list = relations[fromName];
+  if(!list) return null;
+  return list.find(r => r.target === toName) || null;
+}
+
+
+
+/* =====================================================
+   캐릭터 목록 렌더링
+===================================================== */
+
+const characterList = document.getElementById("characterList");
+const detailView = document.getElementById("detailView");
+
+/* &텍스트& → 검열 박스로 변환 */
+function parseCensor(text){
+  return text.replace(/&([^&]+)&/g, (_,inner)=>{
+    return `<span class="censor">${inner}</span>`;
+  });
+}
+
+/* 검열 박스 클릭 토글 */
+document.addEventListener("click",(e)=>{
+  if(e.target.classList.contains("censor")){
+    e.target.classList.toggle("revealed");
+  }
+});
+
+let currentPage = 1;
+let currentData = [];
+const PAGE_SIZE = 4;
+
+function renderCharacters(data, page = 1){
+
+  currentData = data;
+  currentPage = page;
+
+  const total = data.length;
+  const totalPages = Math.ceil(total / PAGE_SIZE);
+  const start = (page - 1) * PAGE_SIZE;
+  const pageData = data.slice(start, start + PAGE_SIZE);
+
+  characterList.innerHTML = "";
+
+  pageData.forEach(char=>{
+
+    const card = document.createElement("div");
+    card.className = "character-card";
+
+    card.innerHTML = `
+      <div class="character-photo" style="background-image:url('${char.image}');background-size:cover;background-position:center;"></div>
+      <div class="character-info">
+        <div class="character-name">${char.name}</div>
+        <div>${char.country}</div>
+      </div>
+    `;
+
+    card.addEventListener("click",()=>{
+
+      currentCharacter = char;
+
+      const mapKey = char.mapCountry || char.country;
+      const world = worldData[mapKey];
+      if(world){
+        document.getElementById("countryTitle").textContent = `${world.title} (${world.year})`;
+        document.querySelector(".base-map").src = world.map;
+      }
+
+      const baseMap = document.querySelector(".base-map");
+      const overlay = document.getElementById("regionOverlay");
+
+      document.getElementById("detailName").textContent = char.koreanName || char.name;
+      document.getElementById("detailAge").innerHTML = parseCensor(char.age || "");
+      document.getElementById("detailGender").innerHTML = parseCensor(char.gender || "");
+      document.getElementById("detailHeight").innerHTML = parseCensor(char.height || "");
+      document.getElementById("detailNationality").innerHTML = parseCensor(char.nationality || "");
+      document.getElementById("detailJob").innerHTML = parseCensor(char.job || "");
+
+      document.getElementById("detailNote").innerHTML =
+        char.note ? "<ul><li>" + char.note.join("</li><li>") + "</li></ul>" : "";
+
+      document.getElementById("detailPhoto").style.backgroundImage = `url('${char.image}')`;
+
+      const commEl = document.getElementById("detailCommissioner");
+      commEl.innerHTML = char.commissioner ? `© ${char.commissioner}` : "";
+
+      const timelineContainer = document.querySelector(".timeline");
+      timelineContainer.innerHTML = "";
+      if(char.timeline){
+        char.timeline.forEach(item=>{
+          timelineContainer.innerHTML += `
+            <div class="timeline-item">
+              <div class="year">${item.date}</div>
+              <div class="timeline-text">${parseCensor(item.content)}</div>
+            </div>
+          `;
+        });
+      }
+
+      document.getElementById("detailPersonality").textContent = char.personality || "";
+
+      const tagArea = document.getElementById("detailTags");
+      tagArea.innerHTML = "";
+      if(char.tags){
+        char.tags.forEach(tag=>{
+          const span = document.createElement("span");
+          span.textContent = tag;
+          tagArea.appendChild(span);
+        });
+      }
+
+      overlay.style.display = "none";
+
+      if(char.region === "Lombardia"){
+        overlay.src = "https://i.imgur.com/pdOKbmf.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Campania"){
+        overlay.src = "https://i.imgur.com/a0F630G.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Busan"){
+        overlay.src = "https://i.imgur.com/NlL45hs.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Gangwon"){
+        overlay.src = "https://i.imgur.com/FVwDXnE.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Illinois"){
+        overlay.src = "https://imgur.com/nW5lWDK.png";
+        overlay.style.display = "block";
+      }else if(char.region === "Missouri"){
+        overlay.src = "https://imgur.com/hqDfldE.png";
+        overlay.style.display = "block";
+      }else{
+        overlay.style.display = "none";
+      }
+
+      document.querySelectorAll(".story-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelector('.story-btn[data-story="1"]').classList.add("active");
+      document.getElementById("storyContent").innerHTML = parseCensor(char.stories?.[1] || "");
+      document.getElementById("storyContent").scrollTop = 0;
+
+      detailView.classList.remove("hidden");
+
+    });
+
+    characterList.appendChild(card);
+
+  });
+
+  /* 페이지네이션 */
+  const existing = document.getElementById("pagination");
+  if(existing) existing.remove();
+
+  if(totalPages > 1){
+    const nav = document.createElement("div");
+    nav.id = "pagination";
+    nav.className = "pagination";
+
+    const prev = document.createElement("button");
+    prev.className = "page-btn";
+    prev.innerHTML = "&#x25C0;&#xFE0E;";
+    prev.disabled = page <= 1;
+    prev.addEventListener("click",()=> renderCharacters(currentData, currentPage - 1));
+
+    const label = document.createElement("span");
+    label.className = "page-label";
+    label.textContent = `${page} / ${totalPages}`;
+
+    const next = document.createElement("button");
+    next.className = "page-btn";
+    next.innerHTML = "&#x25B6;&#xFE0E;";
+    next.disabled = page >= totalPages;
+    next.addEventListener("click",()=> renderCharacters(currentData, currentPage + 1));
+
+    nav.appendChild(prev);
+    nav.appendChild(label);
+    nav.appendChild(next);
+    characterList.parentElement.appendChild(nav);
+  }
+
+}
+
+/* 기본 화면 */
+
+const defaultWorld = worldData["이탈리아"];
+document.getElementById("countryTitle").textContent = `${defaultWorld.title} (${defaultWorld.year})`;
+document.querySelector(".base-map").src = defaultWorld.map;
+renderCharacters(characters.filter(c => c.country === "이탈리아"));
+
+/* 검색 */
+
+document.getElementById("searchInput").addEventListener("input",(e)=>{
+  const keyword = e.target.value.toLowerCase();
+  const filtered = characters.filter(char=>
+    char.name.toLowerCase().includes(keyword) ||
+    char.country.toLowerCase().includes(keyword)
+  );
+  renderCharacters(filtered);
+});
+
+/* 초성 드롭다운 */
+
+const dropdown = document.getElementById("countryDropdown");
+const countryList = document.getElementById("countryList");
+
+document.querySelectorAll(".initial-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+
+    const initial = btn.textContent;
+    countryList.innerHTML = "";
+    const countries = countryData[initial] || [];
+
+    if(countries.length === 0){
+      countryList.innerHTML = "<li>등록된 국가 없음</li>";
+    }else{
+      countries.forEach(country=>{
+        const li = document.createElement("li");
+        li.textContent = country;
+        li.addEventListener("click",()=>{
+
+          const world = worldData[country];
+          if(world){
+            document.getElementById("countryTitle").textContent = `${world.title} (${world.year})`;
+            document.querySelector(".base-map").src = world.map;
+          }
+
+          /* 나라에 맞게 지도 크기 클래스 고정 */
+
+          renderCharacters(characters.filter(c => c.country === country));
+          detailView.classList.add("hidden");
+          document.getElementById("relationStoryView").classList.add("hidden");
+
+          scale = 1;
+          posX = viewport.clientWidth / 2 - 150;
+          posY = viewport.clientHeight / 2 - 50;
+          updateGraph();
+
+          document.getElementById("relationView").classList.add("hidden");
+          document.getElementById("regionOverlay").style.display = "none";
+          dropdown.classList.add("hidden");
+
+        });
+        countryList.appendChild(li);
+      });
+    }
+
+    dropdown.classList.remove("hidden");
+
+  });
+});
+
+document.addEventListener("click",(e)=>{
+  if(!e.target.closest(".initials")) dropdown.classList.add("hidden");
+});
+
+/* 상세창 닫기 */
+
+document.getElementById("closeBtn").addEventListener("click",()=>{
+  detailView.classList.add("hidden");
+  document.getElementById("relationView").classList.add("hidden");
+  document.getElementById("regionOverlay").style.display = "none";
+
+  /* mapCountry가 있는 캐릭터였으면 소속 나라 지도로 복원 */
+  if(currentCharacter && currentCharacter.mapCountry){
+    const originalWorld = worldData[currentCharacter.country];
+    if(originalWorld){
+      document.getElementById("countryTitle").textContent =
+        `${originalWorld.title} (${originalWorld.year})`;
+      document.querySelector(".base-map").src = originalWorld.map;
+    }
+  }
+
+  /* 지도 크기 복원 — 소속 나라 기준 */
+  const restoredCountry = currentCharacter?.mapCountry ? currentCharacter.country : (currentCharacter?.country || "이탈리아");
+});
+
+/* ===================== */
+/* 개인 서사 탭 */
+/* ===================== */
+
+const storyContent = document.getElementById("storyContent");
+const storyButtons = document.querySelectorAll(".story-btn");
+
+storyButtons.forEach(button=>{
+  button.addEventListener("click",()=>{
+    if(!currentCharacter) return;
+    const storyNumber = button.dataset.story;
+    storyButtons.forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
+    storyContent.innerHTML = parseCensor(currentCharacter.stories?.[storyNumber] || "");
+    storyContent.scrollTop = 0;
+  });
+});
+
+document.getElementById("relationStoryView").classList.add("hidden");
+
+/* =====================================================
+   관계도 그리기
+===================================================== */
+
+document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
+
+  e.preventDefault();
+
+  scale = 1;
+  posX = 0;
+  posY = 0;
+  updateGraph();
+
+  const graph = document.getElementById("relationGraph");
+  const relationList = relations[currentCharacter.name];
+
+  if(!relationList?.length){
+    graph.innerHTML = "관계 없음";
+  }else{
+
+    const CENTER_TYPES = ["연인","가족"];
+    const centerRels = relationList.filter(r => CENTER_TYPES.includes(r.label));
+    const outerRels  = relationList.filter(r => !CENTER_TYPES.includes(r.label));
+
+    /* 캔버스 크기 */
+    const W = 560, H = 480;
+    const CX = W/2, CY = H/2;
+    const CARD = 80; /* 카드 한 변 */
+
+    /* 연인/가족 위치 (중앙 근처) */
+    const centerPos = [
+      {x: CX + 160, y: CY},
+      {x: CX - 160, y: CY},
+      {x: CX,       y: CY + 160},
+      {x: CX,       y: CY - 160},
+    ];
+
+    /* 외곽 위치 */
+    const outerPos = [
+      {x: CX - 180, y: CY - 150},
+      {x: CX + 180, y: CY - 150},
+      {x: CX - 180, y: CY + 150},
+      {x: CX + 180, y: CY + 150},
+    ];
+
+    graph.style.position = "relative";
+    graph.style.width    = W + "px";
+    graph.style.height   = H + "px";
+    graph.style.display  = "block";
+    graph.style.padding  = "0";
+    graph.style.gap      = "0";
+    graph.style.flexDirection = "unset";
+
+    function cardHTML(char, x, y, isMe){
+      const img  = char?.relationImage || char?.image || "";
+      const name = char?.koreanName || char?.name || "";
+      const border = isMe ? "2px solid #888" : "1px solid #ccc";
+      return `<div style="
+        position:absolute;
+        left:${x - CARD/2}px;
+        top:${y - CARD/2}px;
+        width:${CARD}px;
+        text-align:center;
+        z-index:2;
+      ">
+        <div style="width:${CARD}px;height:${CARD}px;border:${border};background:#fff url('${img}') center/cover no-repeat;"></div>
+        <div style="font-size:10px;font-weight:bold;word-break:break-word;margin-top:3px;color:#222;">${name}</div>
+      </div>`;
+    }
+
+    function arrowHTML(x, y, angle, color){
+      return `<div style="
+        position:absolute;
+        left:${x}px; top:${y}px;
+        width:0; height:0;
+        border-left:10px solid ${color};
+        border-top:6px solid transparent;
+        border-bottom:6px solid transparent;
+        transform:translate(-50%,-50%) rotate(${angle}deg);
+        transform-origin:center center;
+        z-index:2;
+      "></div>`;
+    }
+
+    /* =====================================================
+       lineHTML
+       — 라벨을 항상 선의 정확한 중점(중앙)에 배치하도록 수정
+       — 기존에는 법선 방향 offset(±20px)을 적용해서
+         라벨이 선에서 떨어진 위치에 그려졌으나,
+         이제는 (x1,y1)-(x2,y2)의 중점만 사용한다.
+    ===================================================== */
+    function lineHTML(x1, y1, x2, y2, color, label, target, lbl, side=0, arrowStart=false, arrowEnd=true){
+      const dx = x2 - x1, dy = y2 - y1;
+      const len = Math.sqrt(dx*dx + dy*dy);
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      const ux = dx/len, uy = dy/len;
+      const arrowSize = 10;
+
+      /* 화살촉만큼 선 끝 줄이기 */
+      const ax1 = arrowStart ? x1 + ux*arrowSize : x1;
+      const ay1 = arrowStart ? y1 + uy*arrowSize : y1;
+      const ax2 = arrowEnd   ? x2 - ux*arrowSize : x2;
+      const ay2 = arrowEnd   ? y2 - uy*arrowSize : y2;
+      const lineLen = Math.sqrt((ax2-ax1)**2 + (ay2-ay1)**2);
+
+      /* 라벨 위치 = 선(원본 x1,y1 ~ x2,y2)의 정확한 중점 */
+      const lx = (x1 + x2) / 2;
+      const ly = (y1 + y2) / 2;
+
+      let html = `<div style="
+          position:absolute;
+          left:${ax1}px; top:${ay1}px;
+          width:${lineLen}px; height:2px;
+          background:${color};
+          transform-origin:0 50%;
+          transform:rotate(${angle}deg);
+          z-index:1;
+        "></div>`;
+
+      if(arrowEnd)   html += arrowHTML(ax2, ay2, angle, color);
+      if(arrowStart) html += arrowHTML(ax1, ay1, angle + 180, color);
+
+      html += `<div class="relation-label" data-target="${target}" data-label="${lbl}" style="
+          position:absolute;
+          left:${lx}px; top:${ly}px;
+          transform:translateX(-50%) translateY(-50%);
+          font-size:9px; font-weight:bold;
+          color:${color}; cursor:pointer;
+          background:rgba(255,255,255,0.9);
+          padding:1px 4px; border-radius:3px;
+          z-index:3; white-space:nowrap;
+        ">${label}</div>`;
+
+      return html;
+    }
+
+    let html = "";
+
+    /* 선 먼저 */
+    const allRels = [
+      ...centerRels.map((r,i) => ({r, pos: centerPos[i] || {x: CX+160, y: CY}})),
+      ...outerRels.map((r,i)  => ({r, pos: outerPos[i]  || {x: CX-180, y: CY-150}})),
+    ];
+
+    allRels.forEach(({r, pos}) => {
+      const myLabel    = r.label;
+      const myColor    = relationColors[myLabel] || "#999";
+      const theirEntry = findRelationEntry(r.target, currentCharacter.name);
+      const theirLabel = theirEntry ? theirEntry.label : myLabel;
+      const theirColor = relationColors[theirLabel] || "#999";
+      const same       = myLabel === theirLabel;
+
+      /* 카드 가장자리 보정 (CARD/2) */
+      const dx = pos.x - CX, dy = pos.y - CY;
+      const dist = Math.sqrt(dx*dx + dy*dy) || 1;
+      const r2 = CARD/2 + 10;
+      const sx = CX + (dx/dist)*r2, sy = CY + (dy/dist)*r2;
+      const ex = pos.x - (dx/dist)*r2, ey = pos.y - (dy/dist)*r2;
+
+      if(same){
+        /* 양방향: 양쪽 화살촉 */
+        html += lineHTML(sx, sy, ex, ey, myColor, myLabel, r.target, myLabel, 0, true, true);
+      }else{
+        /* 두 줄: 나→상대(위), 상대→나(아래) */
+        const px = -(dy/dist)*10, py = (dx/dist)*10;
+        /* 위쪽: 나→상대, 화살촉 ex쪽 */
+        html += lineHTML(sx+px, sy+py, ex+px, ey+py, myColor,    myLabel,    r.target, myLabel,    -1, false, true);
+        /* 아래쪽: 상대→나, 화살촉 sx쪽 (방향 뒤집기) */
+        html += lineHTML(ex-px, ey-py, sx-px, sy-py, theirColor, theirLabel, r.target, theirLabel,  1, false, true);
+      }
+    });
+
+    /* 상대 카드 */
+    allRels.forEach(({r, pos}) => {
+      const target = characters.find(c => c.name === r.target);
+      html += cardHTML(target, pos.x, pos.y, false);
+    });
+
+    /* 나 카드 (맨 위) */
+    html += cardHTML(currentCharacter, CX, CY, true);
+
+    graph.innerHTML = html;
+  }
+
+  document.getElementById("relationView").classList.remove("hidden");
+
+});
+
+document.getElementById("closeRelationBtn").addEventListener("click",()=>{
+  document.getElementById("relationView").classList.add("hidden");
+  document.getElementById("relationStoryView").classList.add("hidden");
+});
+
+/* 관계도 드래그 / 줌 */
+
+const viewport = document.getElementById("relationViewport");
+const graph = document.getElementById("relationGraph");
+
+let scale = 1, posX = 0, posY = 0;
+let dragging = false, startX = 0, startY = 0;
+
+function updateGraph(){
+  graph.style.transform =
+    `translate(calc(-50% + ${posX}px), calc(-50% + ${posY}px)) scale(${scale})`;
+}
+
+viewport.addEventListener("wheel",(e)=>{
+  e.preventDefault();
+  scale += e.deltaY < 0 ? 0.1 : -0.1;
+  scale = Math.max(0.3, Math.min(scale, 5));
+  updateGraph();
+});
+
+viewport.addEventListener("mousedown",(e)=>{ dragging=true; startX=e.clientX-posX; startY=e.clientY-posY; });
+document.addEventListener("mousemove",(e)=>{ if(!dragging) return; posX=e.clientX-startX; posY=e.clientY-startY; updateGraph(); });
+document.addEventListener("mouseup",()=>{ dragging=false; });
+
+viewport.addEventListener("touchstart",(e)=>{ dragging=true; startX=e.touches[0].clientX-posX; startY=e.touches[0].clientY-posY; });
+viewport.addEventListener("touchmove",(e)=>{ if(!dragging) return; posX=e.touches[0].clientX-startX; posY=e.touches[0].clientY-startY; updateGraph(); });
+viewport.addEventListener("touchend",()=>{ dragging=false; });
+
+/* =====================================================
+   관계 라벨 클릭 → 서사창 열기
+===================================================== */
+
+document.addEventListener("click",(e)=>{
+
+  if(!e.target.classList.contains("relation-label")) return;
+
+  const targetName = e.target.dataset.target;
+  if(!currentCharacter || !targetName) return;
+
+  const myEntry = findRelationEntry(currentCharacter.name, targetName);
+  const theirEntry = findRelationEntry(targetName, currentCharacter.name);
+  const targetChar = characters.find(c => c.name === targetName);
+
+  const myName = currentCharacter.koreanName || currentCharacter.name;
+  const theirName = targetChar?.koreanName || targetChar?.name || targetName;
+
+  const summary = myEntry?.summary || theirEntry?.summary || "";
+  const relTimeline = (myEntry?.timeline?.length ? myEntry.timeline : theirEntry?.timeline) || [];
+  const relStories = (myEntry?.stories ? myEntry.stories : theirEntry?.stories) || {};
+
+  currentRelationStories = relStories;
+
+  document.getElementById("relationSummaryContent").textContent = summary;
+
+  const timelineBox = document.getElementById("relationTimeline");
+  let innerHTML = '<div class="relation-timeline-inner">';
+  relTimeline.forEach(item=>{
+    innerHTML += `
+      <div class="timeline-item">
+        <div class="year">${item.date}</div>
+        <div class="timeline-text">${parseCensor(item.content)}</div>
+      </div>
+    `;
+  });
+  innerHTML += '</div>';
+  timelineBox.innerHTML = innerHTML;
+
+  document.getElementById("thoughtTitleA").textContent = `${myName}:`;
+  document.getElementById("thoughtContentA").textContent = myEntry?.myThought || "";
+  document.getElementById("thoughtTitleB").textContent = `${theirName}:`;
+  document.getElementById("thoughtContentB").textContent = theirEntry?.myThought || "";
+
+  document.querySelectorAll(".relation-tab").forEach(btn => btn.classList.remove("active"));
+  document.querySelector(".relation-tab").classList.add("active");
+  document.getElementById("relationStoryContent").innerHTML =
+    parseCensor(currentRelationStories[1] || "관계 스토리가 아직 없어요.");
+
+  document.getElementById("relationStoryView").classList.remove("hidden");
+
+});
+
+document.getElementById("closeRelationStoryBtn").addEventListener("click",()=>{
+  document.getElementById("relationStoryView").classList.add("hidden");
+});
+
+/* 관계 서사 탭 */
+
+document.querySelectorAll(".relation-tab").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".relation-tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const content = document.getElementById("relationStoryContent");
+    const storyNumber = btn.textContent.trim();
+    content.innerHTML = parseCensor(currentRelationStories[storyNumber] || "관계 스토리가 아직 없어요.");
+    content.scrollTop = 0;
+  });
+});

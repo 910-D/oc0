@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+/>
+<title>Character Archive</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="site">
+
+  <!-- HEADER -->
+
+  <header class="header">
+
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="나라 또는 캐릭터 검색"
+    >
+
+    <div class="initials">
+
+      <button class="initial-btn">ㄱ</button>
+      <button class="initial-btn">ㄴ</button>
+      <button class="initial-btn">ㄷ</button>
+      <button class="initial-btn">ㄹ</button>
+      <button class="initial-btn">ㅁ</button>
+      <button class="initial-btn">ㅂ</button>
+      <button class="initial-btn">ㅅ</button>
+      <button class="initial-btn">ㅇ</button>
+      <button class="initial-btn">ㅈ</button>
+      <button class="initial-btn">ㅊ</button>
+      <button class="initial-btn">ㅋ</button>
+      <button class="initial-btn">ㅌ</button>
+      <button class="initial-btn">ㅍ</button>
+      <button class="initial-btn">ㅎ</button>
+
+      <div
+        id="countryDropdown"
+        class="country-dropdown hidden"
+      >
+        <ul id="countryList"></ul>
+      </div>
+
+    </div>
+
+  </header>
+
+  <!-- MAIN -->
+
+  <main class="main">
+
+    <!-- MAP -->
+
+    <section class="map-panel">
+
+      <div
+        id="relationView"
+        class="relation-view hidden"
+      >
+
+        <button
+          id="closeRelationBtn"
+          class="close-relation-btn"
+        >
+          ✕
+        </button>
+
+        <div class="relation-center">
+
+          <div id="relationViewport">
+
+            <div id="relationGraph">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div
+        class="panel-header"
+        id="countryTitle"
+      ></div>
+
+      <div class="map-area">
+
+        <img
+          class="base-map"
+          src="https://i.imgur.com/D7CGmE2.png"
+          alt="Italy Map"
+        >
+
+        <img
+          id="regionOverlay"
+          class="region-overlay"
+          src=""
+        >
+
+      </div>
+
+    </section>
+
+    <!-- PROFILE -->
+
+    <section class="profile-panel">
+
+      <!-- 캐릭터 목록 -->
+
+      <div
+        id="characterList"
+        class="character-grid"
+      ></div>
+
+      <!-- 상세 페이지 -->
+
+      <div
+        id="detailView"
+        class="detail-view hidden"
+      >
+
+        <!-- 상단 바 -->
+
+        <div class="detail-header">
+
+          <button id="closeBtn">
+            ✕
+          </button>
+
+        </div>
+
+        <!-- 인물 정보 -->
+
+        <section class="detail-top">
+
+          <div class="photo-col">
+
+            <div
+              class="commissioner-credit"
+              id="detailCommissioner"
+            ></div>
+
+            <div
+              class="character-photo-large"
+              id="detailPhoto"
+            ></div>
+
+          </div>
+
+          <div class="basic-info">
+
+            <div class="info-row">
+              <div class="info-title">NAME</div>
+              <div
+                class="info-value"
+                id="detailName"
+              ></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-title">AGE</div>
+              <div
+                class="info-value"
+                id="detailAge"
+              ></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-title">GENDER</div>
+              <div
+                class="info-value"
+                id="detailGender"
+              ></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-title">HEIGHT</div>
+              <div
+                class="info-value"
+                id="detailHeight"
+              ></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-title">NATIONALITY</div>
+              <div
+                class="info-value"
+                id="detailNationality"
+              ></div>
+            </div>
+
+            <div class="info-row">
+              <div class="info-title">JOB</div>
+              <div
+                class="info-value"
+                id="detailJob"
+              ></div>
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- 성격 + 타임라인 -->
+
+        <section class="detail-content">
+
+          <!-- 성격 -->
+
+          <div class="personality-box">
+
+            <h3>Personality</h3>
+
+            <div
+              class="tag-area"
+              id="detailTags"
+            ></div>
+
+            <div
+              class="personality-text"
+              id="detailPersonality"
+            ></div>
+
+          </div>
+
+          <!-- 타임라인 -->
+
+          <div class="timeline-box">
+
+            <h3>Timeline</h3>
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <div class="year">1900</div>
+                <div>내용 입력</div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="year">1910</div>
+                <div>내용 입력</div>
+              </div>
+
+              <div class="timeline-item">
+                <div class="year">1920</div>
+                <div>내용 입력</div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- 서사 -->
+
+          <div class="backstory-box">
+
+            <h3>Backstory</h3>
+
+            <div class="story-tabs">
+
+              <button class="story-btn active" data-story="1">1</button>
+              <button class="story-btn" data-story="2">2</button>
+              <button class="story-btn" data-story="3">3</button>
+              <button class="story-btn" data-story="4">4</button>
+              <button class="story-btn" data-story="5">5</button>
+
+            </div>
+
+            <div
+              class="story-content"
+              id="storyContent"
+            >
+              1번 서사 내용
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- 맨 아래 -->
+
+        <section class="detail-bottom">
+
+          <div class="note-box">
+
+            <h3>Note</h3>
+
+            <div
+              class="note-content"
+              id="detailNote"
+            ></div>
+
+          </div>
+
+          <div class="relation-box">
+
+            <h3>Relationship</h3>
+
+            <div class="relation-content">
+
+              <button
+                id="openRelationBtn"
+                class="relation-btn"
+              >
+                상세히 보기
+              </button>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- 관계 서사 창 -->
+
+      <div
+        id="relationStoryView"
+        class="detail-view hidden relation-story-view"
+      >
+
+        <div class="detail-header">
+
+          <button
+            id="closeRelationStoryBtn"
+            class="close-relation-btn"
+          >
+            ✕
+          </button>
+
+        </div>
+
+        <div class="relation-story-scroll">
+
+          <!-- 관계 요약 -->
+
+          <div class="relation-summary-box">
+
+            <h3>Summary</h3>
+
+            <div id="relationSummaryContent"></div>
+
+          </div>
+
+          <!-- 탭 + 서사 -->
+
+          <div class="story-tabs">
+
+            <button class="relation-tab active">1</button>
+            <button class="relation-tab">2</button>
+            <button class="relation-tab">3</button>
+
+          </div>
+
+          <div
+            id="relationStoryContent"
+            class="relation-story-content-box"
+          >
+            관계 스토리
+          </div>
+
+          <!-- 타임라인 + 서로의 생각 -->
+
+          <div class="relation-bottom-row">
+
+            <div class="relation-timeline-box">
+
+              <h3>Timeline</h3>
+
+              <div
+                class="relation-timeline"
+                id="relationTimeline"
+              >
+              </div>
+
+            </div>
+
+            <div class="relation-thoughts-box">
+
+              <div class="thought-half">
+
+                <h3 id="thoughtTitleA"></h3>
+
+                <div id="thoughtContentA"></div>
+
+              </div>
+
+              <div class="thought-half">
+
+                <h3 id="thoughtTitleB"></h3>
+
+                <div id="thoughtContentB"></div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
