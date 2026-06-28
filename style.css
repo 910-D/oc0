@@ -2,11 +2,14 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* 모든 버튼 글자색 검정 통일 */
 button{
   color:#000000;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
 }
 
 /* ◀▶ 이모지 방지: 텍스트 렌더링 강제 */
