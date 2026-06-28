@@ -55,6 +55,7 @@ const characters = [
     image:"https://i.imgur.com/YTawsdj.jpg",
     relationImage:"https://imgur.com/5CTBFqO.png",
     region:"Campania",
+    currentRegion:"Sicilia",
     commissioner:"요거트 님",
     tags:[
       "#능글맞은",
@@ -83,6 +84,7 @@ const characters = [
     relationImage:"https://imgur.com/c06LJg1.png",
     commissioner:"요거트 님",
     region:"Lombardia",
+    currentRegion:"Sicilia",
     tags:[
       "#신중함",
       "#온화함",
@@ -184,6 +186,7 @@ const characters = [
     nationality:"IT, Rome",
     job:"마피아 조직원",
     region:"Lazio",
+    currentRegion:"Sicilia",
     commissioner:"",
     image:""
   },
@@ -194,6 +197,8 @@ const characters = [
     country:"이탈리아",
     mapCountry:"미국",
     region:"Illinois",
+    currentMapCountry:"이탈리아",
+    currentRegion:"Sicilia",
     age:"23",
     gender:"여성",
     height:"165cm",
@@ -285,6 +290,7 @@ const characters = [
     gender:"남성",
     height:"170cm",
     nationality:"IT, pescara",
+    currentRegion:"Sicilia",
     job:"마피아 조직원",
     region:"Abruzzo",
     commissioner:"",
@@ -297,6 +303,8 @@ const characters = [
     country:"이탈리아",
     mapCountry:"미국",
     region:"Missouri",
+    currentMapCountry:"이탈리아",
+    currentRegion:"Sicilia",
     age:"&21&",
     gender:"여성",
     height:"175cm",
@@ -604,6 +612,7 @@ stories:{
     nationality:"KR, Gangwon",
     job:"고등학생",
     region:"Gangwon",
+    currentRegion:"Busan",
     commissioner:"",
     image:"",
     tags:[
@@ -971,6 +980,43 @@ function findRelationEntry(fromName, toName){
   return list.find(r => r.target === toName) || null;
 }
 
+const regionImages = {
+  "Lombardia":"https://i.imgur.com/pdOKbmf.png",
+  "Campania":"https://i.imgur.com/a0F630G.png",
+  "Lazio":"https://imgur.com/lKoIlFo.png",
+  "Busan":"https://i.imgur.com/NlL45hs.png",
+  "Gangwon":"https://i.imgur.com/FVwDXnE.png",
+  "Illinois":"https://imgur.com/nW5lWDK.png",
+  "Missouri":"https://imgur.com/hqDfldE.png",
+  "Abruzzo":"https://imgur.com/xGyHnjT.png",
+  "Sicilia":"https://imgur.com/c9B4Ec8.png"
+};
+
+function applyTimeView(char, mode){
+  const overlay = document.getElementById("regionOverlay");
+
+  const mapKey = mode === "past"
+    ? (char.mapCountry || char.country)
+    : (char.currentMapCountry || char.mapCountry || char.country);
+
+  const region = mode === "past"
+    ? char.region
+    : (char.currentRegion || char.region);
+
+  const world = worldData[mapKey];
+  if(world){
+    document.getElementById("countryTitle").textContent = `${world.title} (${world.year})`;
+    document.querySelector(".base-map").src = world.map;
+  }
+
+  if(region && regionImages[region]){
+    overlay.src = regionImages[region];
+    overlay.style.display = "block";
+  }else{
+    overlay.style.display = "none";
+  }
+}
+
 
 
 /* =====================================================
@@ -1027,13 +1073,6 @@ function renderCharacters(data, page = 1){
 
       currentCharacter = char;
 
-      const mapKey = char.mapCountry || char.country;
-      const world = worldData[mapKey];
-      if(world){
-        document.getElementById("countryTitle").textContent = `${world.title} (${world.year})`;
-        document.querySelector(".base-map").src = world.map;
-      }
-
       const baseMap = document.querySelector(".base-map");
       const overlay = document.getElementById("regionOverlay");
 
@@ -1077,35 +1116,11 @@ function renderCharacters(data, page = 1){
         });
       }
 
-      overlay.style.display = "none";
+      applyTimeView(char, "present");
 
-      if(char.region === "Lombardia"){
-        overlay.src = "https://i.imgur.com/pdOKbmf.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Campania"){
-        overlay.src = "https://i.imgur.com/a0F630G.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Lazio"){
-        overlay.src = "https://imgur.com/lKoIlFo.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Busan"){
-        overlay.src = "https://i.imgur.com/NlL45hs.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Gangwon"){
-        overlay.src = "https://i.imgur.com/FVwDXnE.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Illinois"){
-        overlay.src = "https://imgur.com/nW5lWDK.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Missouri"){
-        overlay.src = "https://imgur.com/hqDfldE.png";
-        overlay.style.display = "block";
-      }else if(char.region === "Abruzzo"){
-        overlay.src = "https://imgur.com/xGyHnjT.png";
-        overlay.style.display = "block";
-      }else{
-        overlay.style.display = "none";
-      }
+      document.getElementById("timeToggle").classList.remove("hidden");
+      document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
+      document.querySelector('.time-btn[data-time="present"]').classList.add("active");
 
       document.querySelectorAll(".story-btn").forEach(btn => btn.classList.remove("active"));
       document.querySelector('.story-btn[data-story="1"]').classList.add("active");
@@ -1232,6 +1247,7 @@ document.getElementById("closeBtn").addEventListener("click",()=>{
   detailView.classList.add("hidden");
   document.getElementById("relationView").classList.add("hidden");
   document.getElementById("regionOverlay").style.display = "none";
+  document.getElementById("timeToggle").classList.add("hidden");
 
   /* mapCountry가 있는 캐릭터였으면 소속 나라 지도로 복원 */
   if(currentCharacter && currentCharacter.mapCountry){
@@ -1245,6 +1261,15 @@ document.getElementById("closeBtn").addEventListener("click",()=>{
 
   /* 지도 크기 복원 — 소속 나라 기준 */
   const restoredCountry = currentCharacter?.mapCountry ? currentCharacter.country : (currentCharacter?.country || "이탈리아");
+});
+
+document.querySelectorAll(".time-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    if(!currentCharacter) return;
+    document.querySelectorAll(".time-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    applyTimeView(currentCharacter, btn.dataset.time);
+  });
 });
 
 /* ===================== */
