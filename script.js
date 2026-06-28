@@ -633,7 +633,12 @@ const relations = {
     { target:"Ginevra Jin Moretti", label:"연인", myThought:"" }
   ],
 
+  "異瑞浚":[
+    { target:"徐莉安", label:"연인", myThought:"" }
+  ],
+
   "徐莉安":[
+    { target:"異瑞浚", label:"연인", myThought:"" },
     { target:"姜娜允", label:"후배", myThought:`「 좋은 후배지. 활기찬 모습이 귀여워. 」
 
 계단에서 발을 헛디딘 나윤을 보며 많이 허둥대는 아이인가? 라는 생각을 먼저 했다. 그러나 나윤과 시간을 보내보니 꽤 당찬 아이라고 생각했다. 자신이 학교에서는 긴장하고 있다는 걸 알고 나윤이 맞춰주고 있는 것 같다고 느꼈다. 은근히 허둥대는 모습을 꽤 귀여워하고 있다.` }
