@@ -692,6 +692,34 @@ stories:{
       "방 안에는 부모님과 함께 만든 공예품들이 전시되어 있고, 알록달록한 색감으로 꾸며져 있다.",
       "스마트폰 사진첩은 온통 부모님이나 친구들과 함께 찍은 셀카와 학교에서 있었던 추억들로 가득 차 있다."
     ]
+  },
+
+  {
+    name:"潤雪",
+    koreanName:"윤 설",
+    country:"대한민국",
+    age:"19",
+    gender:"여성",
+    height:"175cm",
+    nationality:"KR, Busan",
+    job:"학생",
+    region:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
+    name:"白細拏",
+    koreanName:"백 세나",
+    country:"대한민국",
+    age:"19",
+    gender:"여성",
+    height:"174cm",
+    nationality:"KR, Busan",
+    job:"학생",
+    region:"Busan",
+    commissioner:"",
+    image:""
   }
 
 ];
