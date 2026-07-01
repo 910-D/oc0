@@ -848,6 +848,21 @@ stories:{
   },
 
   {
+    name:"單模砑",
+    koreanName:"단 모아",
+    country:"대한민국",
+    age:"19",
+    gender:"남성",
+    height:"181cm",
+    nationality:"KR, Andong",
+    job:"고등학생",
+    region:"Gyeongsangbuk-do",
+    currentRegion:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
     name:"柳理佩",
     koreanName:"류 리페",
     country:"대한민국",
@@ -1043,6 +1058,7 @@ const relations = {
   "異瑞浚":[
     { target:"徐莉安", label:"연인", myThought:"" },
     { target:"李道賢", label:"선배", myThought:"" },
+    { target:"單模砑", label:"선배", myThought:"" },
     { target:"姜娜允", label:"후배", myThought:"" }
   ],
 
@@ -1057,6 +1073,7 @@ const relations = {
   "李道賢":[
     { target:"姜娜允", label:"연인", myThought:"" },
     { target:"異瑞浚", label:"후배", myThought:"" },
+    { target:"單模砑", label:"친구", myThought:"" },
     { target:"白細拏", label:"친구", myThought:"" }
   ],
   
@@ -1145,14 +1162,16 @@ const relations = {
 
   "潤雪":[
     { target:"白細拏", label:"연인", myThought:"" },
-    { target:"柳理佩", label:"후배", myThought:"" }
+    { target:"柳理佩", label:"후배", myThought:"" },
+    { target:"單模砑", label:"친구", myThought:"" }
   ],
 
   "白細拏":[
     { target:"潤雪", label:"연인", myThought:"" },
     { target:"李道賢", label:"친구", myThought:"" },
     { target:"徐莉安", label:"후배", myThought:"" },
-    { target:"柳理佩", label:"후배", myThought:"" }
+    { target:"柳理佩", label:"후배", myThought:"" },
+    { target:"單模砑", label:"친구", myThought:"" }
   ],
 
   "柳多擯":[
@@ -1167,7 +1186,16 @@ const relations = {
     { target:"安脩娥", label:"친구", myThought:"" }
   ],
 
+  "單模砑":[
+    { target:"柳理佩", label:"연인", myThought:"" },
+    { target:"李道賢", label:"친구", myThought:"" },
+    { target:"異瑞浚", label:"후배", myThought:"" },
+    { target:"潤雪", label:"친구", myThought:"" },
+    { target:"白細拏", label:"친구", myThought:"" }
+  ],
+
   "柳理佩":[
+    { target:"單模砑", label:"연인", myThought:"" },
     { target:"徐多仁", label:"후배", myThought:"" },
     { target:"潤雪", label:"선배", myThought:"" },
     { target:"白細拏", label:"선배", myThought:"" },
