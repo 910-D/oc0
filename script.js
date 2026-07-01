@@ -59,7 +59,7 @@ const characters = [
     height:"175cm",
     nationality:"IT, Napoli",
     job:"마피아 조직원",
-    image:"https://i.imgur.com/YTawsdj.jpg",
+    image:"https://imgur.com/1tsyLtH.png",
     relationImage:"https://imgur.com/5CTBFqO.png",
     region:"Campania",
     currentRegion:"Sicilia",
@@ -87,7 +87,7 @@ const characters = [
     height:"170cm",
     nationality:"IT, Milano",
     job:"패션디자이너",
-    image:"https://i.imgur.com/lzVEJQe.jpg",
+    image:"https://imgur.com/Y2gzlwg.png",
     relationImage:"https://imgur.com/c06LJg1.png",
     commissioner:"요거트 님",
     region:"Lombardia",
@@ -516,7 +516,7 @@ stories:{
     job:"고등학생",
     region:"Busan",
     commissioner:"요거트 님",
-    image:"https://imgur.com/f4fXVmd.png",
+    image:"https://imgur.com/Y0ASYuZ.png",
     tags:[
       "#경계하는",
       "#불안정한",
@@ -819,6 +819,21 @@ stories:{
   },
 
   {
+    name:"柳多擯",
+    koreanName:"유 다빈",
+    country:"대한민국",
+    age:"17",
+    gender:"남성",
+    height:"158cm",
+    nationality:"KR, Uljin",
+    job:"고등학생",
+    region:"Gyeongsangbuk-do",
+    currentRegion:"Busan",
+    commissioner:"",
+    image:""
+  },
+
+  {
     name:"徐多仁",
     koreanName:"카텐 / 서 다인",
     country:"대한민국",
@@ -1035,7 +1050,8 @@ const relations = {
     { target:"異瑞浚", label:"연인", myThought:"" },
     { target:"姜娜允", label:"후배", myThought:`「 좋은 후배지. 활기찬 모습이 귀여워. 」
 
-계단에서 발을 헛디딘 나윤을 보며 많이 허둥대는 아이인가? 라는 생각을 먼저 했다. 그러나 나윤과 시간을 보내보니 꽤 당찬 아이라고 생각했다. 자신이 학교에서는 긴장하고 있다는 걸 알고 나윤이 맞춰주고 있는 것 같다고 느꼈다. 은근히 허둥대는 모습을 꽤 귀여워하고 있다.` }
+계단에서 발을 헛디딘 나윤을 보며 많이 허둥대는 아이인가? 라는 생각을 먼저 했다. 그러나 나윤과 시간을 보내보니 꽤 당찬 아이라고 생각했다. 자신이 학교에서는 긴장하고 있다는 걸 알고 나윤이 맞춰주고 있는 것 같다고 느꼈다. 은근히 허둥대는 모습을 꽤 귀여워하고 있다.` },
+    { target:"白細拏", label:"선배", myThought:"" }
   ],
 
   "李道賢":[
@@ -1123,28 +1139,51 @@ const relations = {
     },
     { target:"異瑞浚", label:"선배", myThought:"" },
     { target:"徐多仁", label:"친구", myThought:"" },
-    { target:"安脩娥", label:"친구", myThought:"" }
+    { target:"安脩娥", label:"친구", myThought:"" },
+    { target:"柳多擯", label:"친구", myThought:"" }
   ],
 
   "潤雪":[
-    { target:"白細拏", label:"연인", myThought:"" }
+    { target:"白細拏", label:"연인", myThought:"" },
+    { target:"柳理佩", label:"후배", myThought:"" }
   ],
 
   "白細拏":[
     { target:"潤雪", label:"연인", myThought:"" },
-    { target:"李道賢", label:"친구", myThought:"" }
+    { target:"李道賢", label:"친구", myThought:"" },
+    { target:"徐莉安", label:"후배", myThought:"" },
+    { target:"柳理佩", label:"후배", myThought:"" }
+  ],
+
+  "柳多擯":[
+    { target:"徐多仁", label:"연인", myThought:"" },
+    { target:"姜娜允", label:"친구", myThought:"" }
   ],
 
   "徐多仁":[
-    { target:"姜娜允", label:"친구", myThought:"" }
+    { target:"柳多擯", label:"연인", myThought:"" },
+    { target:"姜娜允", label:"친구", myThought:"" },
+    { target:"柳理佩", label:"친구", myThought:"" },
+    { target:"安脩娥", label:"친구", myThought:"" }
+  ],
+
+  "柳理佩":[
+    { target:"徐多仁", label:"후배", myThought:"" },
+    { target:"潤雪", label:"선배", myThought:"" },
+    { target:"白細拏", label:"선배", myThought:"" },
+    { target:"李世雅", label:"후배", myThought:"" }
   ],
 
   "安脩娥":[
-    { target:"姜娜允", label:"친구", myThought:"" }
+    { target:"姜娜允", label:"친구", myThought:"" },
+    { target:"徐多仁", label:"친구", myThought:"" },
+    { target:"李世雅", label:"친구", myThought:"" }
   ],
 
   "李世雅":[
-    { target:"姜娜允", label:"친구", myThought:"" }
+    { target:"姜娜允", label:"친구", myThought:"" },
+    { target:"安脩娥", label:"친구", myThought:"" },
+    { target:"柳理佩", label:"선배", myThought:"" }
   ]
 
 };
@@ -1213,6 +1252,7 @@ const regionImages = {
   "Busan":"https://i.imgur.com/NlL45hs.png",
   "Sejong":"https://imgur.com/h1tbTk1.png",
   "Gangwon":"https://i.imgur.com/FVwDXnE.png",
+  "Gyeongsangbuk-do":"https://imgur.com/6OZap2v.png",
   "Illinois":"https://imgur.com/nW5lWDK.png",
   "Missouri":"https://imgur.com/hqDfldE.png",
   "Abruzzo":"https://imgur.com/xGyHnjT.png",
@@ -1547,7 +1587,9 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
     /* 캔버스 크기 */
     const W = 560, H = 480;
     const CX = W/2, CY = H/2;
-    const CARD = 80; /* 카드 한 변 */
+    const CARD = 80;
+    const NAME_H = 22; // 이름 영역 높이
+    const CARD_TOTAL_H = CARD + NAME_H; // 카드 전체 높이 (이미지 + 이름)
 
     /* 연인/가족 위치 (중앙 근처) */
     /* 인원수에 맞춰 원형으로 자동 배치 (겹침 방지) */
@@ -1581,21 +1623,33 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
     graph.style.flexDirection = "unset";
 
     function cardHTML(char, x, y, isMe){
-      const img  = char?.relationImage || char?.image || "";
-      const name = char?.koreanName || char?.name || "";
-      const border = isMe ? "2px solid #888" : "1px solid #ccc";
-      return `<div style="
-        position:absolute;
-        left:${x - CARD/2}px;
-        top:${y - CARD/2}px;
-        width:${CARD}px;
-        text-align:center;
-        z-index:2;
-      ">
-        <div style="width:${CARD}px;height:${CARD}px;border:${border};background:#fff url('${img}') center/cover no-repeat;"></div>
-        <div style="font-size:8px;font-weight:bold;word-break:break-word;margin-top:3px;color:#222;">${name}</div>
-      </div>`;
-    }
+  const img  = char?.relationImage || char?.image || "";
+  const name = char?.koreanName || char?.name || "";
+  const border = isMe ? "2px solid #888" : "1px solid #ccc";
+  return `<div style="
+    position:absolute;
+    left:${x - CARD/2}px;
+    top:${y - CARD/2}px;
+    width:${CARD}px;
+    text-align:center;
+    z-index:2;
+  ">
+    <div style="width:${CARD}px;height:${CARD}px;border:${border};background:#fff url('${img}') center/cover no-repeat;"></div>
+    <div style="
+      font-size:8px;
+      font-weight:bold;
+      word-break:break-word;
+      margin-top:3px;
+      color:#222;
+      background:white;
+      border:1.5px solid white;
+      outline:1.5px solid #ccc;
+      padding:1px 3px;
+      position:relative;
+      z-index:3;
+    ">${name}</div>
+  </div>`;
+}
 
     function arrowHTML(x, y, angle, color){
       return `<div style="
@@ -1687,12 +1741,26 @@ document.getElementById("openRelationBtn").addEventListener("click",(e)=>{
       const theirColor = relationColors[theirLabel] || "#999";
       const same       = myLabel === theirLabel;
 
-      /* 카드 가장자리 보정 (CARD/2) */
       const dx = pos.x - CX, dy = pos.y - CY;
       const dist = Math.sqrt(dx*dx + dy*dy) || 1;
-      const r2 = CARD/2 + 10;
-      const sx = CX + (dx/dist)*r2, sy = CY + (dy/dist)*r2;
-      const ex = pos.x - (dx/dist)*r2, ey = pos.y - (dy/dist)*r2;
+      const ux = dx/dist, uy = dy/dist;
+
+      /* 카드 가장자리를 직사각형(가로 CARD/2, 세로 CARD_TOTAL_H/2) 기준으로 계산 */
+      function rectEdge(cx, cy, ux, uy, hw, hh){
+        if(ux === 0 && uy === 0) return {x: cx, y: cy};
+        const tx = ux !== 0 ? hw / Math.abs(ux) : Infinity;
+        const ty = uy !== 0 ? hh / Math.abs(uy) : Infinity;
+        const t  = Math.min(tx, ty);
+        return { x: cx + ux * t, y: cy + uy * t };
+      }
+
+      /* 나 카드: 중심은 (CX, CY + NAME_H/2) — 이름 영역 포함한 시각적 중심 */
+      const myEdge     = rectEdge(CX, CY + NAME_H/2,  ux,  uy,  CARD/2, CARD_TOTAL_H/2);
+      /* 상대 카드: 중심은 (pos.x, pos.y + NAME_H/2) */
+      const theirEdge  = rectEdge(pos.x, pos.y + NAME_H/2, -ux, -uy, CARD/2, CARD_TOTAL_H/2);
+
+      const sx = myEdge.x,    sy = myEdge.y;
+      const ex = theirEdge.x, ey = theirEdge.y;
 
       if(same){
         /* 양방향: 양쪽 화살촉 */
